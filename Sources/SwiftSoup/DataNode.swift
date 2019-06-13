@@ -16,8 +16,8 @@ open class DataNode: Node {
 
     /**
      Create a new DataNode.
-     @param data data contents
-     @param baseUri base URI
+     - Parameter data: data contents
+     - Parameter baseUri: base URI
      */
     public init(_ data: String, _ baseUri: String) {
         super.init(baseUri)
@@ -33,7 +33,7 @@ open class DataNode: Node {
 
     /**
      Get the data contents of this node. Will be unescaped and with original new lines, space etc.
-     @return data
+     - Returns: data
      */
     open func getWholeData() -> String {
 		return attributes!.get(key: DataNode.DATA_KEY)
@@ -41,8 +41,8 @@ open class DataNode: Node {
 
     /**
      * Set the data contents of this node.
-     * @param data unencoded data
-     * @return this node, for chaining
+     * - Parameter data: unencoded data
+     * - Returns: this node, for chaining
      */
     @discardableResult
     open func setWholeData(_ data: String) -> DataNode {
@@ -60,9 +60,9 @@ open class DataNode: Node {
 
     /**
      Create a new DataNode from HTML encoded data.
-     @param encodedData encoded data
-     @param baseUri bass URI
-     @return new DataNode
+     - Parameter encodedData: encoded data
+     - Parameter baseUri: bass URI
+     - Returns: new DataNode
      */
     public static func createFromEncoded(_ encodedData: String, _ baseUri: String)throws->DataNode {
         let data = try Entities.unescape(encodedData)

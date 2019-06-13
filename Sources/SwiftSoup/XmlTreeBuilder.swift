@@ -112,7 +112,7 @@ public class XmlTreeBuilder: TreeBuilder {
      * If the stack contains an element with this tag's name, pop up the stack to remove the first occurrence. If not
      * found, skips.
      *
-     * @param endTag
+     * - Parameter endTag:
      */
     private func popStackToClose(_ endTag: Token.EndTag)throws {
         let elName: String = try endTag.name()

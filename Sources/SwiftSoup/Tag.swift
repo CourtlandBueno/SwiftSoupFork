@@ -150,7 +150,7 @@ open class Tag: Hashable, Codable {
     /**
      * Get this tag's name.
      *
-     * @return the tag's name
+     * - Returns: the tag's name
      */
     open func getName() -> String {
         return self._tagName
@@ -165,9 +165,9 @@ open class Tag: Hashable, Codable {
      * Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals().
      * </p>
      *
-     * @param tagName Name of tag, e.g. "p". Case insensitive.
-     * @param settings used to control tag name sensitivity
-     * @return The tag, either defined or new generic.
+     * - Parameter tagName: Name of tag, e.g. "p". Case insensitive.
+     * - Parameter settings: used to control tag name sensitivity
+     * - Returns: The tag, either defined or new generic.
      */
     public static func valueOf(_ tagName: String, _ settings: ParseSettings)throws->Tag {
         var tagName = tagName
@@ -194,8 +194,8 @@ open class Tag: Hashable, Codable {
      * Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals().
      * </p>
      *
-     * @param tagName Name of tag, e.g. "p". <b>Case sensitive</b>.
-     * @return The tag, either defined or new generic.
+     * - Parameter tagName: Name of tag, e.g. "p". <b>Case sensitive</b>.
+     * - Returns: The tag, either defined or new generic.
      */
     public static func valueOf(_ tagName: String)throws->Tag {
         return try valueOf(tagName, ParseSettings.preserveCase)
@@ -204,7 +204,7 @@ open class Tag: Hashable, Codable {
     /**
      * Gets if this is a block tag.
      *
-     * @return if block tag
+     * - Returns: if block tag
      */
     open func isBlock() -> Bool {
         return _isBlock
@@ -213,7 +213,7 @@ open class Tag: Hashable, Codable {
     /**
      * Gets if this tag should be formatted as a block (or as inline)
      *
-     * @return if should be formatted as block or inline
+     * - Returns: if should be formatted as block or inline
      */
     open func formatAsBlock() -> Bool {
         return _formatAsBlock
@@ -222,7 +222,7 @@ open class Tag: Hashable, Codable {
     /**
      * Gets if this tag can contain block tags.
      *
-     * @return if tag can contain block tags
+     * - Returns: if tag can contain block tags
      */
     open func canContainBlock() -> Bool {
         return _canContainBlock
@@ -231,7 +231,7 @@ open class Tag: Hashable, Codable {
     /**
      * Gets if this tag is an inline tag.
      *
-     * @return if this tag is an inline tag.
+     * - Returns: if this tag is an inline tag.
      */
     open func isInline() -> Bool {
         return !_isBlock
@@ -240,7 +240,7 @@ open class Tag: Hashable, Codable {
     /**
      * Gets if this tag is a data only tag.
      *
-     * @return if this tag is a data only tag
+     * - Returns: if this tag is a data only tag
      */
     open func isData() -> Bool {
         return !_canContainInline && !isEmpty()
@@ -249,7 +249,7 @@ open class Tag: Hashable, Codable {
     /**
      * Get if this is an empty tag
      *
-     * @return if this is an empty tag
+     * - Returns: if this is an empty tag
      */
     open func isEmpty() -> Bool {
         return _empty
@@ -258,7 +258,7 @@ open class Tag: Hashable, Codable {
     /**
      * Get if this tag is self closing.
      *
-     * @return if this tag should be output as self closing.
+     * - Returns: if this tag should be output as self closing.
      */
     open func isSelfClosing() -> Bool {
         return _empty || _selfClosing
@@ -267,7 +267,7 @@ open class Tag: Hashable, Codable {
     /**
      * Get if this is a pre-defined tag, or was auto created on parsing.
      *
-     * @return if a known tag
+     * - Returns: if a known tag
      */
     open func isKnownTag() -> Bool {
         return Tag.tags[_tagName] != nil
@@ -276,8 +276,8 @@ open class Tag: Hashable, Codable {
     /**
      * Check if this tagname is a known tag.
      *
-     * @param tagName name of tag
-     * @return if known HTML tag
+     * - Parameter tagName: name of tag
+     * - Returns: if known HTML tag
      */
     public static func isKnownTag(_ tagName: String) -> Bool {
         return Tag.tags[tagName] != nil
@@ -286,7 +286,7 @@ open class Tag: Hashable, Codable {
     /**
      * Get if this tag should preserve whitespace within child text nodes.
      *
-     * @return if preserve whitepace
+     * - Returns: if preserve whitepace
      */
     public func preserveWhitespace() -> Bool {
         return _preserveWhitespace
@@ -294,7 +294,7 @@ open class Tag: Hashable, Codable {
 
     /**
      * Get if this tag represents a control associated with a form. E.g. input, textarea, output
-     * @return if associated with a form
+     * - Returns: if associated with a form
      */
     public func isFormListed() -> Bool {
         return _formList
@@ -302,7 +302,7 @@ open class Tag: Hashable, Codable {
 
     /**
      * Get if this tag represents an element that should be submitted with a form. E.g. input, option
-     * @return if submittable with a form
+     * - Returns: if submittable with a form
      */
     public func isFormSubmittable() -> Bool {
         return _formSubmit

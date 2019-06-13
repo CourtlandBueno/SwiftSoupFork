@@ -16,7 +16,7 @@ open class TokenQueue {
 
     /**
      Create a new TokenQueue.
-     @param data string of data to back queue.
+     - Parameter data: string of data to back queue.
      */
     public init (_ data: String) {
         queue = data
@@ -24,7 +24,7 @@ open class TokenQueue {
 
     /**
      * Is the queue empty?
-     * @return true if no data left in queue.
+     * - Returns: true if no data left in queue.
      */
     open func isEmpty() -> Bool {
         return remainingLength() == 0
@@ -36,7 +36,7 @@ open class TokenQueue {
 
     /**
      * Retrieves but does not remove the first character from the queue.
-     * @return First character, or 0 if empty.
+     * - Returns: First character, or 0 if empty.
      */
     open func peek() -> Character {
         return isEmpty() ? Character(UnicodeScalar(0)) : queue[pos]
@@ -44,7 +44,7 @@ open class TokenQueue {
 
     /**
      Add a character to the start of the queue (will be the next character retrieved).
-     @param c character to add
+     - Parameter c: character to add
      */
     open func addFirst(_ c: Character) {
         addFirst(String(c))
@@ -52,7 +52,7 @@ open class TokenQueue {
 
     /**
      Add a string to the start of the queue.
-     @param seq string to add.
+     - Parameter seq: string to add.
      */
     open func addFirst(_ seq: String) {
         // not very performant, but an edge case
@@ -62,8 +62,8 @@ open class TokenQueue {
 
     /**
      * Tests if the next characters on the queue match the sequence. Case insensitive.
-     * @param seq String to check queue for.
-     * @return true if the next characters match.
+     * - Parameter seq: String to check queue for.
+     * - Returns: true if the next characters match.
      */
     open func matches(_ seq: String) -> Bool {
         return queue.regionMatches(true, pos, seq, 0, seq.count)
@@ -71,8 +71,8 @@ open class TokenQueue {
 
     /**
      * Case sensitive match test.
-     * @param seq string to case sensitively check for
-     * @return true if matched, false if not
+     * - Parameter seq: string to case sensitively check for
+     * - Returns: true if matched, false if not
      */
     open func matchesCS(_ seq: String) -> Bool {
         return queue.startsWith(seq, pos)
@@ -80,8 +80,8 @@ open class TokenQueue {
 
     /**
      Tests if the next characters match any of the sequences. Case insensitive.
-     @param seq list of strings to case insensitively check for
-     @return true of any matched, false if none did
+     - Parameter seq: list of strings to case insensitively check for
+     - Returns: true of any matched, false if none did
      */
     open func matchesAny(_ seq: [String]) -> Bool {
         for s in seq {
@@ -116,8 +116,8 @@ open class TokenQueue {
     /**
      * Tests if the queue matches the sequence (as with match), and if they do, removes the matched string from the
      * queue.
-     * @param seq String to search for, and if found, remove from queue.
-     * @return true if found and removed, false if not found.
+     * - Parameter seq: String to search for, and if found, remove from queue.
+     * - Returns: true if found and removed, false if not found.
      */
     @discardableResult
     open func matchChomp(_ seq: String) -> Bool {
@@ -131,7 +131,7 @@ open class TokenQueue {
 
     /**
      Tests if queue starts with a whitespace character.
-     @return if starts with whitespace
+     - Returns: if starts with whitespace
      */
     open func matchesWhitespace() -> Bool {
         return !isEmpty() && StringUtil.isWhitespace(queue.charAt(pos))
@@ -139,7 +139,7 @@ open class TokenQueue {
 
     /**
      Test if the queue matches a word character (letter or digit).
-     @return if matches a word character
+     - Returns: if matches a word character
      */
     open func matchesWord() -> Bool {
         return !isEmpty() && (Character.isLetterOrDigit(queue.charAt(pos)))
@@ -155,7 +155,7 @@ open class TokenQueue {
 
     /**
      * Consume one character off queue.
-     * @return first character on queue.
+     * - Returns: first character on queue.
      */
     open func consume() -> Character {
         let i = pos
@@ -168,7 +168,7 @@ open class TokenQueue {
      * throw an illegal state exception -- but you should be running match() against that condition.
      <p>
      Case insensitive.
-     * @param seq sequence to remove from head of queue.
+     * - Parameter seq: sequence to remove from head of queue.
      */
     open func consume(_ seq: String)throws {
         if (!matches(seq)) {
@@ -186,8 +186,8 @@ open class TokenQueue {
 
     /**
      * Pulls a string off the queue, up to but exclusive of the match sequence, or to the queue running out.
-     * @param seq String to end on (and not include in return, but leave on queue). <b>Case sensitive.</b>
-     * @return The matched data consumed from queue.
+     * - Parameter seq: String to end on (and not include in return, but leave on queue). <b>Case sensitive.</b>
+     * - Returns: The matched data consumed from queue.
      */
 	@discardableResult
     open func consumeTo(_ seq: String) -> String {
@@ -229,8 +229,8 @@ open class TokenQueue {
 
     /**
      Consumes to the first sequence provided, or to the end of the queue. Leaves the terminator on the queue.
-     @param seq any number of terminators to consume to. <b>Case insensitive.</b>
-     @return consumed string
+     - Parameter seq: any number of terminators to consume to. <b>Case insensitive.</b>
+     - Returns: consumed string
      */
     // todo: method name. not good that consumeTo cares for case, and consume to any doesn't. And the only use for this
     // is is a case sensitive time...
@@ -250,8 +250,8 @@ open class TokenQueue {
      * <p>
      * If the queue runs out of characters before finding the seq, will return as much as it can (and queue will go
      * isEmpty() == true).
-     * @param seq String to match up to, and not include in return, and to pull off queue. <b>Case sensitive.</b>
-     * @return Data matched from queue.
+     * - Parameter seq: String to match up to, and not include in return, and to pull off queue. <b>Case sensitive.</b>
+     * - Returns: Data matched from queue.
      */
     open func chompTo(_ seq: String) -> String {
         let data = consumeTo(seq)
@@ -270,9 +270,9 @@ open class TokenQueue {
      * and leave " four" on the queue. Unbalanced openers and closers can quoted (with ' or ") or escaped (with \). Those escapes will be left
      * in the returned string, which is suitable for regexes (where we need to preserve the escape), but unsuitable for
      * contains text strings; use unescape for that.
-     * @param open opener
-     * @param close closer
-     * @return data matched from the queue
+     * - Parameter open: opener
+     * - Parameter close: closer
+     * - Returns: data matched from the queue
      */
     open func chompBalanced(_ open: Character, _ close: Character) -> String {
         var start = -1
@@ -311,8 +311,8 @@ open class TokenQueue {
 
     /**
      * Unescaped a \ escaped string.
-     * @param in backslash escaped string
-     * @return unescaped string
+     * - Parameter in: backslash escaped string
+     * - Returns: unescaped string
      */
     public static func unescape(_ input: String) -> String {
         let out = StringBuilder()
@@ -332,7 +332,7 @@ open class TokenQueue {
 
     /**
      * Pulls the next run of whitespace characters of the queue.
-     * @return Whether consuming whitespace or not
+     * - Returns: Whether consuming whitespace or not
      */
     @discardableResult
     open func consumeWhitespace() -> Bool {
@@ -346,7 +346,7 @@ open class TokenQueue {
 
     /**
      * Retrieves the next run of word type (letter or digit) off the queue.
-     * @return String of word characters from queue, or empty string if none.
+     * - Returns: String of word characters from queue, or empty string if none.
      */
 	@discardableResult
     open func consumeWord() -> String {
@@ -360,7 +360,7 @@ open class TokenQueue {
     /**
      * Consume an tag name off the queue (word or :, _, -)
      *
-     * @return tag name
+     * - Returns: tag name
      */
     open func consumeTagName() -> String {
         let start = pos
@@ -374,7 +374,7 @@ open class TokenQueue {
     /**
      * Consume a CSS element selector (tag name, but | instead of : for namespaces (or *| for wildcard namespace), to not conflict with :pseudo selects).
      *
-     * @return tag name
+     * - Returns: tag name
      */
     open func consumeElementSelector() -> String {
         let start = pos
@@ -388,7 +388,7 @@ open class TokenQueue {
     /**
      Consume a CSS identifier (ID or class) off the queue (letter, digit, -, _)
      http://www.w3.org/TR/CSS2/syndata.html#value-def-identifier
-     @return identifier
+     - Returns: identifier
      */
     open func consumeCssIdentifier() -> String {
         let start = pos
@@ -401,7 +401,7 @@ open class TokenQueue {
 
     /**
      Consume an attribute key off the queue (letter, digit, -, _, :")
-     @return attribute key
+     - Returns: attribute key
      */
     open func consumeAttributeKey() -> String {
         let start = pos
@@ -414,7 +414,7 @@ open class TokenQueue {
 
     /**
      Consume and return whatever is left on the queue.
-     @return remained of queue.
+     - Returns: remained of queue.
      */
     open func remainder() -> String {
         let remainder = queue.substring(pos, queue.count-pos)

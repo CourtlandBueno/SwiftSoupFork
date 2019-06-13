@@ -77,7 +77,7 @@ public class CombiningEvaluator: Evaluator {
     public final class Or: CombiningEvaluator {
         /**
          * Create a new Or evaluator. The initial evaluators are ANDed together and used as the first clause of the OR.
-         * @param evaluators initial OR clause (these are wrapped into an AND evaluator).
+         * - Parameter evaluators: initial OR clause (these are wrapped into an AND evaluator).
          */
         public override init(_ evaluators: [Evaluator]) {
             super.init()

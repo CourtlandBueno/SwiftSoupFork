@@ -606,7 +606,7 @@ class HtmlTreeBuilder: TreeBuilder {
      dt element, an li element, an option element, an optgroup element, a p element, an rp element, or an rt element,
      the UA must pop the current node off the stack of open elements.
      
-     @param excludeTag If a step requires the UA to generate implied end tags but lists an element to exclude from the
+     - Parameter excludeTag: If a step requires the UA to generate implied end tags but lists an element to exclude from the
      process, then the UA must perform the above steps as if that element was not in the above list.
      */
 

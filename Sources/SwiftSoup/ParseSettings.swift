@@ -23,8 +23,8 @@ open class ParseSettings {
 
     /**
      * Define parse settings.
-     * @param tag preserve tag case?
-     * @param attribute preserve attribute name case?
+     * - Parameter tag: preserve tag case?
+     * - Parameter attribute: preserve attribute name case?
      */
     public init(_ tag: Bool, _ attribute: Bool) {
         preserveTagCase = tag

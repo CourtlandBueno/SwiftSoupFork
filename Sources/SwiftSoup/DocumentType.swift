@@ -22,10 +22,10 @@ public class DocumentType: Node {
 
     /**
      * Create a new doctype element.
-     * @param name the doctype's name
-     * @param publicId the doctype's public ID
-     * @param systemId the doctype's system ID
-     * @param baseUri the doctype's base URI
+     * - Parameter name: the doctype's name
+     * - Parameter publicId: the doctype's public ID
+     * - Parameter systemId: the doctype's system ID
+     * - Parameter baseUri: the doctype's base URI
      */
     public init(_ name: String, _ publicId: String, _ systemId: String, _ baseUri: String) {
         super.init(baseUri)
@@ -41,10 +41,10 @@ public class DocumentType: Node {
 
     /**
      * Create a new doctype element.
-     * @param name the doctype's name
-     * @param publicId the doctype's public ID
-     * @param systemId the doctype's system ID
-     * @param baseUri the doctype's base URI
+     * - Parameter name: the doctype's name
+     * - Parameter publicId: the doctype's public ID
+     * - Parameter systemId: the doctype's system ID
+     * - Parameter baseUri: the doctype's base URI
      */
     public init(_ name: String, _ pubSysKey: String?, _ publicId: String, _ systemId: String, _ baseUri: String) {
         super.init(baseUri)

@@ -19,9 +19,9 @@ public class FormElement: Element {
     /**
      * Create a new, standalone form element.
      *
-     * @param tag        tag of this element
-     * @param baseUri    the base URI
-     * @param attributes initial attributes
+     * - Parameter tag:        tag of this element
+     * - Parameter baseUri:    the base URI
+     * - Parameter attributes: initial attributes
      */
     public override init(_ tag: Tag, _ baseUri: String, _ attributes: Attributes) {
         self._elements = Elements([])
@@ -35,7 +35,7 @@ public class FormElement: Element {
     
     /**
      * Get the list of form control elements associated with this form.
-     * @return form controls associated with this element.
+     * - Returns: form controls associated with this element.
      */
     public func elements() -> Elements {
         return _elements
@@ -43,8 +43,8 @@ public class FormElement: Element {
 
     /**
      * Add a form control element to this form.
-     * @param element form control to add
-     * @return this form element, for chaining
+     * - Parameter element: form control to add
+     * - Returns: this form element, for chaining
      */
     @discardableResult
     public func addElement(_ element: Element) -> FormElement {
@@ -72,7 +72,7 @@ public class FormElement: Element {
     /**
      * Prepare to submit this form. A Connection object is created with the request set up from the form values. You
      * can then set up other options (like user-agent, timeout, cookies), then execute it.
-     * @return a connection prepared from the values of this form.
+     * - Returns: a connection prepared from the values of this form.
      * @throws IllegalArgumentException if the form's absolute action URL cannot be determined. Make sure you pass the
      * document's base URI when parsing.
      */
@@ -91,7 +91,7 @@ public class FormElement: Element {
     /**
      * Get the data that this form submits. The returned list is a copy of the data, and changes to the contents of the
      * list will not be reflected in the DOM.
-     * @return a list of key vals
+     * - Returns: a list of key vals
      */
 //    public List<Connection.KeyVal> formData() {
 //        ArrayList<Connection.KeyVal> data = new ArrayList<Connection.KeyVal>();

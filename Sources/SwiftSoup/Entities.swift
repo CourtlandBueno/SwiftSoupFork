@@ -172,8 +172,8 @@ public class Entities {
 
     /**
      * Check if the input is a known named entity
-     * @param name the possible entity name (e.g. "lt" or "amp")
-     * @return true if a known named entity
+     * - Parameter name: the possible entity name (e.g. "lt" or "amp")
+     * - Returns: true if a known named entity
      */
     public static func isNamedEntity(_ name: String ) -> Bool {
         return (EscapeMode.extended.codepointForName(name) != empty)
@@ -181,8 +181,8 @@ public class Entities {
 
     /**
      * Check if the input is a known named entity in the base entity set.
-     * @param name the possible entity name (e.g. "lt" or "amp")
-     * @return true if a known named entity in the base set
+     * - Parameter name: the possible entity name (e.g. "lt" or "amp")
+     * - Returns: true if a known named entity in the base set
      * @see #isNamedEntity(String)
      */
     public static func isBaseNamedEntity(_ name: String) -> Bool {
@@ -191,8 +191,8 @@ public class Entities {
 
     /**
      * Get the Character value of the named entity
-     * @param name named entity (e.g. "lt" or "amp")
-     * @return the Character value of the named entity (e.g. '{@literal <}' or '{@literal &}')
+     * - Parameter name: named entity (e.g. "lt" or "amp")
+     * - Returns: the Character value of the named entity (e.g. '{@literal <}' or '{@literal &}')
      * @deprecated does not support characters outside the BMP or multiple character names
      */
     public static func getCharacterByName(name: String) -> Character {
@@ -201,8 +201,8 @@ public class Entities {
 
     /**
      * Get the character(s) represented by the named entitiy
-     * @param name entity (e.g. "lt" or "amp")
-     * @return the string value of the character(s) represented by this entity, or "" if not defined
+     * - Parameter name: entity (e.g. "lt" or "amp")
+     * - Returns: the string value of the character(s) represented by this entity, or "" if not defined
      */
     public static func getByName(name: String) -> String {
         let val = multipoints[name]
@@ -340,9 +340,9 @@ public class Entities {
 
     /**
      * Unescape the input string.
-     * @param string to un-HTML-escape
-     * @param strict if "strict" (that is, requires trailing ';' char, otherwise that's optional)
-     * @return unescaped string
+     * - Parameter string: to un-HTML-escape
+     * - Parameter strict: if "strict" (that is, requires trailing ';' char, otherwise that's optional)
+     * - Returns: unescaped string
      */
     public static func unescape(string: String, strict: Bool)throws -> String {
         return try Parser.unescapeEntities(string, strict)

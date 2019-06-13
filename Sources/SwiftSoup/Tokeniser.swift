@@ -282,8 +282,8 @@ final class Tokeniser {
 
     /**
      * Utility method to consume reader and unescape entities found within.
-     * @param inAttribute
-     * @return unescaped string from reader
+     * - Parameter inAttribute:
+     * - Returns: unescaped string from reader
      */
     func unescapeEntities(_ inAttribute: Bool)throws->String {
         let builder: StringBuilder = StringBuilder()

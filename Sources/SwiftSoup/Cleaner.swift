@@ -13,7 +13,7 @@ open class Cleaner {
 
     /**
      Create a new cleaner, that sanitizes documents using the supplied whitelist.
-     @param whitelist white-list to clean with
+     - Parameter whitelist: white-list to clean with
      */
     public init(_ whitelist: Whitelist) {
         self.whitelist = whitelist
@@ -22,8 +22,8 @@ open class Cleaner {
 	/**
 	Creates a new, clean document, from the original dirty document, containing only elements allowed by the whitelist.
 	The original document is not modified. Only elements from the dirt document's <code>body</code> are used.
-	@param dirtyDocument Untrusted base document to clean.
-	@return cleaned document.
+	- Parameter dirtyDocument: Untrusted base document to clean.
+	- Returns: cleaned document.
 	*/
 	public func clean(_ dirtyDocument: Document)throws->Document {
 		//Validate.notNull(dirtyDocument)
@@ -43,8 +43,8 @@ open class Cleaner {
 	using the {@link #clean(Document)} document. If using as a validator, it is recommended to still clean the document
 	to ensure enforced attributes are set correctly, and that the output is tidied.
 	</p>
-	@param dirtyDocument document to test
-	@return true if no tags or attributes need to be removed; false if they do
+	- Parameter dirtyDocument: document to test
+	- Returns: true if no tags or attributes need to be removed; false if they do
 	*/
 	public func isValid(_ dirtyDocument: Document)throws->Bool {
 	//Validate.notNull(dirtyDocument)

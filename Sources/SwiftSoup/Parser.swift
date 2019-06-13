@@ -22,7 +22,7 @@ public class Parser {
 
 	/**
 	* Create a new Parser, using the specified TreeBuilder
-	* @param treeBuilder TreeBuilder to use to parse input into Documents.
+	* - Parameter treeBuilder: TreeBuilder to use to parse input into Documents.
 	*/
 	init(_ treeBuilder: TreeBuilder) {
 		self._treeBuilder = treeBuilder
@@ -37,7 +37,7 @@ public class Parser {
 	// gets & sets
 	/**
 	* Get the TreeBuilder currently in use.
-	* @return current TreeBuilder.
+	* - Returns: current TreeBuilder.
 	*/
 	public func getTreeBuilder() -> TreeBuilder {
 		return _treeBuilder
@@ -45,8 +45,8 @@ public class Parser {
 
 	/**
 	* Update the TreeBuilder used when parsing content.
-	* @param treeBuilder current TreeBuilder
-	* @return this, for chaining
+	* - Parameter treeBuilder: current TreeBuilder
+	* - Returns: this, for chaining
 	*/
     @discardableResult
 	public func setTreeBuilder(_ treeBuilder: TreeBuilder) -> Parser {
@@ -56,7 +56,7 @@ public class Parser {
 
 	/**
 	* Check if parse error tracking is enabled.
-	* @return current track error state.
+	* - Returns: current track error state.
 	*/
 	public func isTrackErrors() -> Bool {
 		return _maxErrors > 0
@@ -64,8 +64,8 @@ public class Parser {
 
 	/**
 	* Enable or disable parse error tracking for the next parse.
-	* @param maxErrors the maximum number of errors to track. Set to 0 to disable.
-	* @return this, for chaining
+	* - Parameter maxErrors: the maximum number of errors to track. Set to 0 to disable.
+	* - Returns: this, for chaining
 	*/
     @discardableResult
 	public func setTrackErrors(_ maxErrors: Int) -> Parser {
@@ -75,7 +75,7 @@ public class Parser {
 
 	/**
 	* Retrieve the parse errors, if any, from the last parse.
-	* @return list of parse errors, up to the size of the maximum errors tracked.
+	* - Returns: list of parse errors, up to the size of the maximum errors tracked.
 	*/
 	public func getErrors() -> ParseErrorList {
 		return _errors
@@ -95,10 +95,10 @@ public class Parser {
 	/**
 	* Parse HTML into a Document.
 	*
-	* @param html HTML to parse
-	* @param baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
+	* - Parameter html: HTML to parse
+	* - Parameter baseUri: base URI of document (i.e. original fetch location), for resolving relative URLs.
 	*
-	* @return parsed Document
+	* - Returns: parsed Document
 	*/
 	public static func parse(_ html: String, _ baseUri: String)throws->Document {
 		let treeBuilder: TreeBuilder = HtmlTreeBuilder()
@@ -111,12 +111,12 @@ public class Parser {
 	/**
 	* Parse a fragment of HTML into a list of nodes. The context element, if supplied, supplies parsing context.
 	*
-	* @param fragmentHtml the fragment of HTML to parse
-	* @param context (optional) the element that this HTML fragment is being parsed for (i.e. for inner HTML). This
+	* - Parameter fragmentHtml: the fragment of HTML to parse
+	* - Parameter context: (optional) the element that this HTML fragment is being parsed for (i.e. for inner HTML). This
 	* provides stack context (for implicit element creation).
-	* @param baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
+	* - Parameter baseUri: base URI of document (i.e. original fetch location), for resolving relative URLs.
 	*
-	* @return list of nodes parsed from the input HTML. Note that the context element, if supplied, is not modified.
+	* - Returns: list of nodes parsed from the input HTML. Note that the context element, if supplied, is not modified.
 	*/
 	public static func parseFragment(_ fragmentHtml: String, _ context: Element?, _ baseUri: String)throws->Array<Node> {
 		let treeBuilder = HtmlTreeBuilder()
@@ -126,9 +126,9 @@ public class Parser {
 	/**
 	* Parse a fragment of XML into a list of nodes.
 	*
-	* @param fragmentXml the fragment of XML to parse
-	* @param baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
-	* @return list of nodes parsed from the input XML.
+	* - Parameter fragmentXml: the fragment of XML to parse
+	* - Parameter baseUri: base URI of document (i.e. original fetch location), for resolving relative URLs.
+	* - Returns: list of nodes parsed from the input XML.
 	*/
 	public static func parseXmlFragment(_ fragmentXml: String, _ baseUri: String)throws->Array<Node> {
 		let treeBuilder: XmlTreeBuilder = XmlTreeBuilder()
@@ -138,10 +138,10 @@ public class Parser {
 	/**
 	* Parse a fragment of HTML into the {@code body} of a Document.
 	*
-	* @param bodyHtml fragment of HTML
-	* @param baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
+	* - Parameter bodyHtml: fragment of HTML
+	* - Parameter baseUri: base URI of document (i.e. original fetch location), for resolving relative URLs.
 	*
-	* @return Document, with empty head, and HTML parsed into body
+	* - Returns: Document, with empty head, and HTML parsed into body
 	*/
 	public static func parseBodyFragment(_ bodyHtml: String, _ baseUri: String)throws->Document {
 		let doc: Document = Document.createShell(baseUri)
@@ -162,9 +162,9 @@ public class Parser {
 
 	/**
 	* Utility method to unescape HTML entities from a string
-	* @param string HTML escaped string
-	* @param inAttribute if the string is to be escaped in strict mode (as attributes are)
-	* @return an unescaped string
+	* - Parameter string: HTML escaped string
+	* - Parameter inAttribute: if the string is to be escaped in strict mode (as attributes are)
+	* - Returns: an unescaped string
 	*/
 	public static func unescapeEntities(_ string: String, _ inAttribute: Bool)throws->String {
 		let tokeniser: Tokeniser = Tokeniser(CharacterReader(string), ParseErrorList.noTracking())
@@ -172,10 +172,10 @@ public class Parser {
 	}
 
 	/**
-	* @param bodyHtml HTML to parse
-	* @param baseUri baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
+	* - Parameter bodyHtml: HTML to parse
+	* - Parameter baseUri: baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
 	*
-	* @return parsed Document
+	* - Returns: parsed Document
 	* @deprecated Use {@link #parseBodyFragment} or {@link #parseFragment} instead.
 	*/
 	public static func parseBodyFragmentRelaxed(_ bodyHtml: String, _ baseUri: String)throws->Document {
@@ -187,7 +187,7 @@ public class Parser {
 	/**
 	* Create a new HTML parser. This parser treats input as HTML5, and enforces the creation of a normalised document,
 	* based on a knowledge of the semantics of the incoming tags.
-	* @return a new HTML parser.
+	* - Returns: a new HTML parser.
 	*/
 	public static func htmlParser() -> Parser {
 		return Parser(HtmlTreeBuilder())
@@ -196,7 +196,7 @@ public class Parser {
 	/**
 	* Create a new XML parser. This parser assumes no knowledge of the incoming tags and does not treat it as HTML,
 	* rather creates a simple tree directly from the input.
-	* @return a new simple XML parser.
+	* - Returns: a new simple XML parser.
 	*/
 	public static func xmlParser() -> Parser {
 		return Parser(XmlTreeBuilder())

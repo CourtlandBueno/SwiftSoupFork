@@ -37,7 +37,7 @@ open class Attribute {
 //    }
     /**
      Get the attribute key.
-     @return the attribute key
+     - Returns: the attribute key
      */
     open func getKey() -> String {
         return key
@@ -45,7 +45,7 @@ open class Attribute {
 
     /**
      Set the attribute key; case is preserved.
-     @param key the new key; must not be null
+     - Parameter key: the new key; must not be null
      */
     open func setKey(key: String) throws {
         try Validate.notEmpty(string: key)
@@ -54,7 +54,7 @@ open class Attribute {
 
     /**
      Get the attribute value.
-     @return the attribute value
+     - Returns: the attribute value
      */
     open func getValue() -> String {
         return value
@@ -62,7 +62,7 @@ open class Attribute {
 
     /**
      Set the attribute value.
-     @param value the new attribute value; must not be null
+     - Parameter value: the new attribute value; must not be null
      */
     @discardableResult
     open func setValue(value: String) -> String {
@@ -73,7 +73,7 @@ open class Attribute {
 
     /**
      Get the HTML representation of this attribute; e.g. {@code href="index.html"}.
-     @return HTML
+     - Returns: HTML
      */
     public func html() -> String {
         let accum =  StringBuilder()
@@ -92,7 +92,7 @@ open class Attribute {
 
     /**
      Get the string representation of this attribute, implemented as {@link #html()}.
-     @return string
+     - Returns: string
      */
     open func toString() -> String {
         return html()
@@ -100,9 +100,9 @@ open class Attribute {
 
     /**
      * Create a new Attribute from an unencoded key and a HTML attribute encoded value.
-     * @param unencodedKey assumes the key is not encoded, as can be only run of simple \w chars.
-     * @param encodedValue HTML attribute encoded value
-     * @return attribute
+     * - Parameter unencodedKey: assumes the key is not encoded, as can be only run of simple \w chars.
+     * - Parameter encodedValue: HTML attribute encoded value
+     * - Returns: attribute
      */
     public static func createFromEncoded(unencodedKey: String, encodedValue: String) throws ->Attribute {
         let value = try Entities.unescape(string: encodedValue, strict: true)
@@ -116,8 +116,8 @@ open class Attribute {
     /**
      * Collapsible if it's a boolean attribute and value is empty or same as name
      *
-     * @param out Outputsettings
-     * @return  Returns whether collapsible or not
+     * - Parameter out: Outputsettings
+     * - Returns:  Returns whether collapsible or not
      */
     public final func shouldCollapseAttribute(out: OutputSettings) -> Bool {
         return ("" == value  || value.equalsIgnoreCase(string: key))

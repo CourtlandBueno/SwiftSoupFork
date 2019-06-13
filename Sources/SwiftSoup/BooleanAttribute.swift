@@ -14,7 +14,7 @@ import Foundation
 open class BooleanAttribute: Attribute {
     /**
      * Create a new boolean attribute from unencoded (raw) key.
-     * @param key attribute key
+     * - Parameter key: attribute key
      */
     init(key: String) throws {
         try super.init(key: key, value: "")

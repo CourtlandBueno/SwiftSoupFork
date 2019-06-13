@@ -11,51 +11,51 @@
  this whitelist configuration, and the initial defaults.
  */
 
+import Foundation
+
 /**
  Whitelists define what HTML (elements and attributes) to allow through the cleaner. Everything else is removed.
- <p>
- Start with one of the defaults:
- </p>
- <ul>
- <li>{@link #none}
- <li>{@link #simpleText}
- <li>{@link #basic}
- <li>{@link #basicWithImages}
- <li>{@link #relaxed}
- </ul>
- <p>
- If you need to allow more through (please be careful!), tweak a base whitelist with:
- </p>
- <ul>
- <li>{@link #addTags}
- <li>{@link #addAttributes}
- <li>{@link #addEnforcedAttribute}
- <li>{@link #addProtocols}
- </ul>
- <p>
- You can remove any setting from an existing whitelist with:
- </p>
- <ul>
- <li>{@link #removeTags}
- <li>{@link #removeAttributes}
- <li>{@link #removeEnforcedAttribute}
- <li>{@link #removeProtocols}
- </ul>
  
- <p>
+ Start with one of the defaults:
+ 
+ 
+  - {@link #none}
+  - {@link #simpleText}
+  - {@link #basic}
+  - {@link #basicWithImages}
+  - {@link #relaxed}
+ 
+ 
+ If you need to allow more through (please be careful!), tweak a base whitelist with:
+ 
+ 
+  - {@link #addTags}
+  - {@link #addAttributes}
+  - {@link #addEnforcedAttribute}
+  - {@link #addProtocols}
+ 
+ 
+ You can remove any setting from an existing whitelist with:
+ 
+ 
+  - {@link #removeTags}
+  - {@link #removeAttributes}
+  - {@link #removeEnforcedAttribute}
+  - {@link #removeProtocols}
+ 
+ 
+ 
  The cleaner and these whitelists assume that you want to clean a <code>body</code> fragment of HTML (to add user
  supplied HTML into a templated page), and not to clean a full HTML document. If the latter is the case, either wrap the
  document HTML around the cleaned body HTML, or create a whitelist that allows <code>html</code> and <code>head</code>
  elements as appropriate.
- </p>
- <p>
+ 
+ 
  If you are going to extend a whitelist, please be very careful. Make sure you understand what attributes may lead to
  XSS attack vectors. URL attributes are particularly vulnerable and require careful validation. See
  http://ha.ckers.org/xss.html for some XSS attack examples.
- </p>
+ 
  */
-
-import Foundation
 
 public class Whitelist {
     private var tagNames: Set<TagName> // tags allowed, lower case. e.g. [p, br, span]
@@ -67,7 +67,7 @@ public class Whitelist {
     /**
      This whitelist allows only text nodes: all HTML will be stripped.
      
-     @return whitelist
+     - Returns: whitelist
      */
     public static func none() -> Whitelist {
         return Whitelist()
@@ -77,26 +77,25 @@ public class Whitelist {
      This whitelist allows only simple text formatting: <code>b, em, i, strong, u</code>. All other HTML (tags and
      attributes) will be removed.
      
-     @return whitelist
+     - Returns: whitelist
      */
     public static func simpleText()throws ->Whitelist {
         return try Whitelist().addTags("b", "em", "i", "strong", "u")
     }
 
     /**
-     <p>
+     
      This whitelist allows a fuller range of text nodes: <code>a, b, blockquote, br, cite, code, dd, dl, dt, em, i, li,
      ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>, and appropriate attributes.
-     </p>
-     <p>
+     
+     
      Links (<code>a</code> elements) can point to <code>http, https, ftp, mailto</code>, and have an enforced
      <code>rel=nofollow</code> attribute.
-     </p>
-     <p>
-     Does not allow images.
-     </p>
      
-     @return whitelist
+     
+     Does not allow images.
+     
+     - Returns: whitelist
      */
     public static func basic()throws->Whitelist {
         return try Whitelist()
@@ -120,7 +119,7 @@ public class Whitelist {
      This whitelist allows the same text tags as {@link #basic}, and also allows <code>img</code> tags, with appropriate
      attributes, with <code>src</code> pointing to <code>http</code> or <code>https</code>.
      
-     @return whitelist
+     - Returns: whitelist
      */
     public static func basicWithImages()throws->Whitelist {
         return try basic()
@@ -138,7 +137,7 @@ public class Whitelist {
      Links do not have an enforced <code>rel=nofollow</code> attribute, but you can add that if desired.
      </p>
      
-     @return whitelist
+     - Returns: whitelist
      */
     public static func relaxed()throws->Whitelist {
         return try Whitelist()
@@ -189,8 +188,8 @@ public class Whitelist {
     /**
      Add a list of allowed elements to a whitelist. (If a tag is not allowed, it will be removed from the HTML.)
      
-     @param tags tag names to allow
-     @return this (for chaining)
+     - Parameter tags: tag names to allow
+     - Returns: this (for chaining)
      */
     @discardableResult
     open func addTags(_ tags: String...)throws ->Whitelist {
@@ -204,8 +203,8 @@ public class Whitelist {
     /**
      Remove a list of allowed elements from a whitelist. (If a tag is not allowed, it will be removed from the HTML.)
      
-     @param tags tag names to disallow
-     @return this (for chaining)
+     - Parameter tags: tag names to disallow
+     - Returns: this (for chaining)
      */
     @discardableResult
     open func removeTags(_ tags: String...)throws ->Whitelist {
@@ -236,9 +235,9 @@ public class Whitelist {
      <code>addAttributes(":all", "class")</code>.
      </p>
      
-     @param tag  The tag the attributes are for. The tag will be added to the allowed tag list if necessary.
-     @param keys List of valid attributes for the tag
-     @return this (for chaining)
+     - Parameter tag:  The tag the attributes are for. The tag will be added to the allowed tag list if necessary.
+     - Parameter keys: List of valid attributes for the tag
+     - Returns: this (for chaining)
      */
     @discardableResult
     open func addAttributes(_ tag: String, _ keys: String...)throws->Whitelist {
@@ -278,9 +277,9 @@ public class Whitelist {
      <code>removeAttributes(":all", "class")</code>.
      </p>
      
-     @param tag  The tag the attributes are for.
-     @param keys List of invalid attributes for the tag
-     @return this (for chaining)
+     - Parameter tag:  The tag the attributes are for.
+     - Parameter keys: List of invalid attributes for the tag
+     - Returns: this (for chaining)
      */
     @discardableResult
     open func removeAttributes(_ tag: String, _ keys: String...)throws->Whitelist {
@@ -330,10 +329,10 @@ public class Whitelist {
      <code>&lt;a href="..." rel="nofollow"&gt;</code>
      </p>
      
-     @param tag   The tag the enforced attribute is for. The tag will be added to the allowed tag list if necessary.
-     @param key   The attribute key
-     @param value The enforced attribute value
-     @return this (for chaining)
+     - Parameter tag:   The tag the enforced attribute is for. The tag will be added to the allowed tag list if necessary.
+     - Parameter key:   The attribute key
+     - Parameter value: The enforced attribute value
+     - Returns: this (for chaining)
      */
     @discardableResult
     open func addEnforcedAttribute(_ tag: String, _ key: String, _ value: String)throws->Whitelist {
@@ -361,9 +360,9 @@ public class Whitelist {
     /**
      Remove a previously configured enforced attribute from a tag.
      
-     @param tag   The tag the enforced attribute is for.
-     @param key   The attribute key
-     @return this (for chaining)
+     - Parameter tag:   The tag the enforced attribute is for.
+     - Parameter key:   The attribute key
+     - Returns: this (for chaining)
      */
     @discardableResult
     open func removeEnforcedAttribute(_ tag: String, _ key: String)throws->Whitelist {
@@ -395,8 +394,8 @@ public class Whitelist {
      * will be removed.
      * </p>
      *
-     * @param preserve {@code true} to allow relative links, {@code false} (default) to deny
-     * @return this Whitelist, for chaining.
+     * - Parameter preserve: {@code true} to allow relative links, {@code false} (default) to deny
+     * - Returns: this Whitelist, for chaining.
      * @see #addProtocols
      */
     @discardableResult
@@ -416,10 +415,10 @@ public class Whitelist {
      E.g.: <code>addProtocols("a", "href", "#")</code>
      </p>
      
-     @param tag       Tag the URL protocol is for
-     @param key       Attribute key
-     @param protocols List of valid protocols
-     @return this, for chaining
+     - Parameter tag:       Tag the URL protocol is for
+     - Parameter key:       Attribute key
+     - Parameter protocols: List of valid protocols
+     - Returns: this, for chaining
      */
     @discardableResult
     open func addProtocols(_ tag: String, _ key: String, _ protocols: String...)throws->Whitelist {
@@ -462,10 +461,10 @@ public class Whitelist {
      E.g.: <code>removeProtocols("a", "href", "ftp")</code>
      </p>
      
-     @param tag       Tag the URL protocol is for
-     @param key       Attribute key
-     @param protocols List of invalid protocols
-     @return this, for chaining
+     - Parameter tag:       Tag the URL protocol is for
+     - Parameter key:       Attribute key
+     - Parameter protocols: List of invalid protocols
+     - Returns: this, for chaining
      */
     @discardableResult
     open func removeProtocols(_ tag: String, _ key: String, _ protocols: String...)throws->Whitelist {
@@ -501,8 +500,8 @@ public class Whitelist {
 
     /**
      * Test if the supplied tag is allowed by this whitelist
-     * @param tag test tag
-     * @return true if allowed
+     * - Parameter tag: test tag
+     * - Returns: true if allowed
      */
     public func isSafeTag(_ tag: String) -> Bool {
         return tagNames.contains(TagName.valueOf(tag))
@@ -510,10 +509,10 @@ public class Whitelist {
 
     /**
      * Test if the supplied attribute is allowed by this whitelist for this tag
-     * @param tagName tag to consider allowing the attribute in
-     * @param el element under test, to confirm protocol
-     * @param attr attribute under test
-     * @return true if allowed
+     * - Parameter tagName: tag to consider allowing the attribute in
+     * - Parameter el: element under test, to confirm protocol
+     * - Parameter attr: attribute under test
+     * - Returns: true if allowed
      */
     public func isSafeAttribute(_ tagName: String, _ el: Element, _ attr: Attribute)throws -> Bool {
         let tag: TagName = TagName.valueOf(tagName)

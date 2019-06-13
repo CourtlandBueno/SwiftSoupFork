@@ -40,8 +40,8 @@ open class Attributes: NSCopying {
     }
     /**
      Get an attribute value by key.
-     @param key the (case-sensitive) attribute key
-     @return the attribute value if set; or empty string if not set.
+     - Parameter key: the (case-sensitive) attribute key
+     - Returns: the attribute value if set; or empty string if not set.
      @see #hasKey(String)
      */
     open func  get(key: String) -> String {
@@ -51,8 +51,8 @@ open class Attributes: NSCopying {
 
     /**
      * Get an attribute's value by case-insensitive key
-     * @param key the attribute name
-     * @return the first matching attribute value if set; or empty string if not set.
+     * - Parameter key: the attribute name
+     * - Returns: the first matching attribute value if set; or empty string if not set.
      */
     open func getIgnoreCase(key: String )throws -> String {
         try Validate.notEmpty(string: key)
@@ -67,8 +67,8 @@ open class Attributes: NSCopying {
 
     /**
      Set a new attribute, or replace an existing one by key.
-     @param key attribute key
-     @param value attribute value
+     - Parameter key: attribute key
+     - Parameter value: attribute value
      */
     open func put(_ key: String, _ value: String) throws {
         let attr = try Attribute(key: key, value: value)
@@ -77,8 +77,8 @@ open class Attributes: NSCopying {
 
     /**
      Set a new boolean attribute, remove attribute if value is false.
-     @param key attribute key
-     @param value attribute value
+     - Parameter key: attribute key
+     - Parameter value: attribute value
      */
     open func put(_ key: String, _ value: Bool) throws {
         if (value) {
@@ -90,7 +90,7 @@ open class Attributes: NSCopying {
 
     /**
      Set a new attribute, or replace an existing one by key.
-     @param attribute attribute
+     - Parameter attribute: attribute
      */
     open func put(attribute: Attribute) {
         attributes.put(value: attribute, forKey: attribute.getKey())
@@ -98,7 +98,7 @@ open class Attributes: NSCopying {
 
     /**
      Remove an attribute by key. <b>Case sensitive.</b>
-     @param key attribute key to remove
+     - Parameter key: attribute key to remove
      */
     open func remove(key: String)throws {
         try Validate.notEmpty(string: key)
@@ -107,7 +107,7 @@ open class Attributes: NSCopying {
 
     /**
      Remove an attribute by key. <b>Case insensitive.</b>
-     @param key attribute key to remove
+     - Parameter key: attribute key to remove
      */
     open func removeIgnoreCase(key: String ) throws {
         try Validate.notEmpty(string: key)
@@ -120,8 +120,8 @@ open class Attributes: NSCopying {
 
     /**
      Tests if these attributes contain an attribute with this key.
-     @param key case-sensitive key to check for
-     @return true if key exists, false otherwise
+     - Parameter key: case-sensitive key to check for
+     - Returns: true if key exists, false otherwise
      */
     open func hasKey(key: String) -> Bool {
         return attributes.containsKey(key: key)
@@ -129,8 +129,8 @@ open class Attributes: NSCopying {
 
     /**
      Tests if these attributes contain an attribute with this key.
-     @param key key to check for
-     @return true if key exists, false otherwise
+     - Parameter key: key to check for
+     - Returns: true if key exists, false otherwise
      */
     open func hasKeyIgnoreCase(key: String) -> Bool {
         for attrKey in attributes.keySet() {
@@ -143,7 +143,7 @@ open class Attributes: NSCopying {
 
     /**
      Get the number of attributes in this set.
-     @return size
+     - Returns: size
      */
     private func size() -> Int {
         return attributes.count//TODO: check retyrn right size
@@ -151,7 +151,7 @@ open class Attributes: NSCopying {
     
     /**
      Get the number of attributes in this set.
-     @return size
+     - Returns: size
      */
     open var count: Int {
         return size()
@@ -159,7 +159,7 @@ open class Attributes: NSCopying {
     
     /**
      Add all the attributes from the incoming set to this set.
-     @param incoming attributes to add to these attributes.
+     - Parameter incoming: attributes to add to these attributes.
      */
     open func addAll(incoming: Attributes?) {
         guard let incoming = incoming else {
@@ -183,7 +183,7 @@ open class Attributes: NSCopying {
     /**
      Get the attributes as a List, for iteration. Do not modify the keys of the attributes via this view, as changes
      to keys will not be recognised in the containing set.
-     @return an view of the attributes as a List.
+     - Returns: an view of the attributes as a List.
      */
     open func asList() -> Array<Attribute> {
         var list: Array<Attribute> = Array(/*attributes.count*/)
@@ -196,7 +196,7 @@ open class Attributes: NSCopying {
     /**
      * Retrieves a filtered view of attributes that are HTML5 custom data attributes; that is, attributes with keys
      * starting with {@code data-}.
-     * @return map of custom data attributes.
+     * - Returns: map of custom data attributes.
      */
     //Map<String, String>
     open func dataset() -> Dictionary<String, String> {
@@ -213,7 +213,7 @@ open class Attributes: NSCopying {
 
     /**
      Get the HTML representation of these attributes.
-     @return HTML
+     - Returns: HTML
      @throws SerializationException if the HTML representation of the attributes cannot be constructed.
      */
     open func html()throws -> String {
@@ -235,8 +235,8 @@ open class Attributes: NSCopying {
 
     /**
      * Checks if these attributes are equal to another set of attributes, by comparing the two sets
-     * @param o attributes to compare with
-     * @return if both sets of attributes have the same content
+     * - Parameter o: attributes to compare with
+     * - Returns: if both sets of attributes have the same content
      */
     open func equals(o: AnyObject?) -> Bool {
         if(o == nil) {return false}
@@ -247,7 +247,7 @@ open class Attributes: NSCopying {
 
     /**
      * Calculates the hashcode of these attributes, by iterating all attributes and summing their hashcodes.
-     * @return calculated hashcode
+     * - Returns: calculated hashcode
      */
     open func hashCode() -> Int {
         return attributes.hashCode()

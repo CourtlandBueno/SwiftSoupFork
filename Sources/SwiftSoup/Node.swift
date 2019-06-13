@@ -30,7 +30,7 @@ open class Node: Equatable, Hashable {
 	/**
 	* Get the list index of this node in its node sibling list. I.e. if this is the first node
 	* sibling, returns 0.
-	* @return position in node sibling list
+	* - Returns: position in node sibling list
 	* @see org.jsoup.nodes.Element#elementSiblingIndex()
 	*/
     public private(set) var siblingIndex: Int = 0
@@ -48,8 +48,8 @@ open class Node: Equatable, Hashable {
     
     /**
      Create a new Node.
-     @param baseUri base URI
-     @param attributes attributes (not null, but may be empty)
+     - Parameter baseUri: base URI
+     - Parameter attributes: attributes (not null, but may be empty)
      */
     public init(_ baseUri: String, _ attributes: Attributes) {
         self.childNodes = Node.EMPTY_NODES
@@ -74,7 +74,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Get the node name of this node. Use for debugging purposes and not logic switching (for that, use instanceof).
-     @return node name
+     - Returns: node name
      */
     public func nodeName() -> String {
         preconditionFailure("This method must be overridden")
@@ -89,8 +89,8 @@ open class Node: Equatable, Hashable {
      * E.g.:
      * <blockquote><code>String url = a.attr("abs:href");</code></blockquote>
      *
-     * @param attributeKey The attribute key.
-     * @return The attribute, or empty string if not present (to avoid nulls).
+     * - Parameter attributeKey: The attribute key.
+     * - Returns: The attribute, or empty string if not present (to avoid nulls).
      * @see #attributes()
      * @see #hasAttr(String)
      * @see #absUrl(String)
@@ -111,7 +111,7 @@ open class Node: Equatable, Hashable {
 
     /**
      * Get all of the element's attributes.
-     * @return attributes (which implements iterable, in same order as presented in original HTML).
+     * - Returns: attributes (which implements iterable, in same order as presented in original HTML).
      */
     open func getAttributes() -> Attributes? {
         return attributes
@@ -119,9 +119,9 @@ open class Node: Equatable, Hashable {
 
     /**
      * Set an attribute (key=value). If the attribute already exists, it is replaced.
-     * @param attributeKey The attribute key.
-     * @param attributeValue The attribute value.
-     * @return this (for chaining)
+     * - Parameter attributeKey: The attribute key.
+     * - Parameter attributeValue: The attribute value.
+     * - Returns: this (for chaining)
      */
     @discardableResult
     open func attr(_ attributeKey: String, _ attributeValue: String)throws->Node {
@@ -136,8 +136,8 @@ open class Node: Equatable, Hashable {
     }
     /**
      * Test if this element has an attribute. <b>Case insensitive</b>
-     * @param attributeKey The attribute key to check.
-     * @return true if the attribute exists, false if not.
+     * - Parameter attributeKey: The attribute key to check.
+     * - Returns: true if the attribute exists, false if not.
      */
     open func hasAttr(_ attributeKey: String) -> Bool {
 		guard let attributes = attributes else {
@@ -160,8 +160,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Remove an attribute from this element.
-     * @param attributeKey The attribute to remove.
-     * @return this (for chaining)
+     * - Parameter attributeKey: The attribute to remove.
+     * - Returns: this (for chaining)
      */
     @discardableResult
     open func removeAttr(_ attributeKey: String)throws->Node {
@@ -176,7 +176,7 @@ open class Node: Equatable, Hashable {
     }
     /**
      Get the base URI of this node.
-     @return base URI
+     - Returns: base URI
      */
     open func getBaseUri() -> String {
         return baseUri!
@@ -184,7 +184,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Update the base URI of this node and all of its descendants.
-     @param baseUri base URI to set
+     - Parameter baseUri: base URI to set
      */
     open func setBaseUri(_ baseUri: String)throws {
         class nodeVisitor: NodeVisitor {
@@ -224,8 +224,8 @@ open class Node: Equatable, Hashable {
      * <code>String absUrl = linkEl.attr("abs:href");</code>
      * </p>
      *
-     * @param attributeKey The attribute key
-     * @return An absolute URL if one could be made, or an empty string (not null) if the attribute was missing or
+     * - Parameter attributeKey: The attribute key
+     * - Returns: An absolute URL if one could be made, or an empty string (not null) if the attribute was missing or
      * could not be made successfully into a URL.
      * @see #attr
      * @see java.net.URL#URL(java.net.URL, String)
@@ -246,8 +246,8 @@ open class Node: Equatable, Hashable {
     }
     /**
      Get a child node by its 0-based index.
-     @param index index of child node
-     @return the child node at this index. Throws a {@code IndexOutOfBoundsException} if the index is out of bounds.
+     - Parameter index: index of child node
+     - Returns: the child node at this index. Throws a {@code IndexOutOfBoundsException} if the index is out of bounds.
      */
     open func childNode(_ index: Int) -> Node {
         return childNodes[index]
@@ -256,7 +256,7 @@ open class Node: Equatable, Hashable {
     /**
      Get this node's children. Presented as an unmodifiable list: new children can not be added, but the child nodes
      themselves can be manipulated.
-     @return list of children. If no children, returns an empty list.
+     - Returns: list of children. If no children, returns an empty list.
      */
     open func getChildNodes()->Array<Node> {
         return childNodes
@@ -265,7 +265,7 @@ open class Node: Equatable, Hashable {
     /**
      * Returns a deep copy of this node's children. Changes made to these nodes will not be reflected in the original
      * nodes
-     * @return a deep copy of this node's children
+     * - Returns: a deep copy of this node's children
      */
     open func childNodesCopy()->Array<Node> {
 		var children: Array<Node> = Array<Node>()
@@ -277,7 +277,7 @@ open class Node: Equatable, Hashable {
 
     /**
      * Get the number of child nodes that this node holds.
-     * @return the number of child nodes that this node holds.
+     * - Returns: the number of child nodes that this node holds.
      */
     public func childNodeSize() -> Int {
         return childNodes.count
@@ -289,7 +289,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Gets this node's parent node.
-     @return parent node or null if no parent.
+     - Returns: parent node or null if no parent.
      */
     open var parent: Node? {
         return parentNode
@@ -297,7 +297,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Gets this node's parent node. Node overridable by extending classes, so useful if you really just need the Node type.
-     @return parent node or null if no parent.
+     - Returns: parent node or null if no parent.
      */
     final func getParentNode() -> Node? {
         return parentNode
@@ -305,7 +305,7 @@ open class Node: Equatable, Hashable {
 
     /**
      * Gets the Document associated with this Node.
-     * @return the Document associated with this Node, or null if there is no such Document.
+     * - Returns: the Document associated with this Node, or null if there is no such Document.
      */
     open func ownerDocument() -> Document? {
         if let this =  self as? Document {
@@ -330,8 +330,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Insert the specified HTML into the DOM before this node (i.e. as a preceding sibling).
-     * @param html HTML to add before this node
-     * @return this node, for chaining
+     * - Parameter html: HTML to add before this node
+     * - Returns: this node, for chaining
      * @see #after(String)
      */
     @discardableResult
@@ -342,8 +342,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Insert the specified node into the DOM before this node (i.e. as a preceding sibling).
-     * @param node to add before this node
-     * @return this node, for chaining
+     * - Parameter node: to add before this node
+     * - Returns: this node, for chaining
      * @see #after(Node)
      */
     @discardableResult
@@ -357,8 +357,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Insert the specified HTML into the DOM after this node (i.e. as a following sibling).
-     * @param html HTML to add after this node
-     * @return this node, for chaining
+     * - Parameter html: HTML to add after this node
+     * - Returns: this node, for chaining
      * @see #before(String)
      */
     @discardableResult
@@ -369,8 +369,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Insert the specified node into the DOM after this node (i.e. as a following sibling).
-     * @param node to add after this node
-     * @return this node, for chaining
+     * - Parameter node: to add after this node
+     * - Returns: this node, for chaining
      * @see #before(Node)
      */
     @discardableResult
@@ -393,8 +393,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Insert the specified HTML into the DOM after this node (i.e. as a following sibling).
-     * @param html HTML to add after this node
-     * @return this node, for chaining
+     * - Parameter html: HTML to add after this node
+     * - Returns: this node, for chaining
      * @see #before(String)
      */
     @discardableResult
@@ -405,8 +405,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Insert the specified node into the DOM after this node (i.e. as a following sibling).
-     * @param node to add after this node
-     * @return this node, for chaining
+     * - Parameter node: to add after this node
+     * - Returns: this node, for chaining
      * @see #before(Node)
      */
     @discardableResult
@@ -429,8 +429,8 @@ open class Node: Equatable, Hashable {
 
     /**
      Wrap the supplied HTML around this node.
-     @param html HTML to wrap around this element, e.g. {@code <div class="head"></div>}. Can be arbitrarily deep.
-     @return this node, for chaining.
+     - Parameter html: HTML to wrap around this element, e.g. {@code <div class="head"></div>}. Can be arbitrarily deep.
+     - Returns: this node, for chaining.
      */
     @discardableResult
     open func wrap(_ html: String)throws->Node? {
@@ -471,7 +471,7 @@ open class Node: Equatable, Hashable {
      * <p>{@code <div>One Two <b>Three</b></div>}</p>
      * and the {@code "Two "} {@link TextNode} being returned.
      *
-     * @return the first child of this node, after the node has been unwrapped. Null if the node had no children.
+     * - Returns: the first child of this node, after the node has been unwrapped. Null if the node had no children.
      * @see #remove()
      * @see #wrap(String)
      */
@@ -497,7 +497,7 @@ open class Node: Equatable, Hashable {
 
     /**
      * Replace this node in the DOM with the supplied node.
-     * @param in the node that will will replace the existing node.
+     * - Parameter in: the node that will will replace the existing node.
      */
     public func replaceWith(_ input: Node)throws {
         try Validate.notNull(obj: input)
@@ -585,7 +585,7 @@ open class Node: Equatable, Hashable {
     /**
      Retrieves this node's sibling nodes. Similar to {@link #childNodes()  node.parent.childNodes()}, but does not
      include this node (a node is not a sibling of itself).
-     @return node siblings. If the node has no parent, returns an empty list.
+     - Returns: node siblings. If the node has no parent, returns an empty list.
      */
     open func siblingNodes()->Array<Node> {
         if (parentNode == nil) {
@@ -605,7 +605,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Get this node's next sibling.
-     @return next sibling, or null if this is the last sibling
+     - Returns: next sibling, or null if this is the last sibling
      */
     open func nextSibling() -> Node? {
         guard let siblings: Array<Node> =  parentNode?.childNodes else {
@@ -622,7 +622,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Get this node's previous sibling.
-     @return the previous sibling, or null if this is the first sibling
+     - Returns: the previous sibling, or null if this is the first sibling
      */
     open func previousSibling() -> Node? {
         if (parentNode == nil) {
@@ -642,8 +642,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Perform a depth-first traversal through this node and its descendants.
-     * @param nodeVisitor the visitor callbacks to perform on each node
-     * @return this node, for chaining
+     * - Parameter nodeVisitor: the visitor callbacks to perform on each node
+     * - Returns: this node, for chaining
      */
     @discardableResult
     open func traverse(_ nodeVisitor: NodeVisitor)throws->Node {
@@ -654,7 +654,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Get the outer HTML of this node.
-     @return HTML
+     - Returns: HTML
      */
     open func outerHtml()throws->String {
         let accum: StringBuilder = StringBuilder(128)
@@ -673,7 +673,7 @@ open class Node: Equatable, Hashable {
 
     /**
      Get the outer HTML of this node.
-     @param accum accumulator to place HTML into
+     - Parameter accum: accumulator to place HTML into
      @throws IOException if appending to the given accumulator fails.
      */
     func outerHtmlHead(_ accum: StringBuilder, _ depth: Int, _ out: OutputSettings) throws {
@@ -687,8 +687,8 @@ open class Node: Equatable, Hashable {
     /**
      * Write this node and its children to the given {@link Appendable}.
      *
-     * @param appendable the {@link Appendable} to write to.
-     * @return the supplied {@link Appendable}, for chaining.
+     * - Parameter appendable: the {@link Appendable} to write to.
+     * - Returns: the supplied {@link Appendable}, for chaining.
      */
     open func html(_ appendable: StringBuilder)throws -> StringBuilder {
         try outerHtml(appendable)
@@ -701,8 +701,8 @@ open class Node: Equatable, Hashable {
 
     /**
      * Check if this node is the same instance of another (object identity test).
-     * @param o other object to compare to
-     * @return true if the content of this node is the same as the other
+     * - Parameter o: other object to compare to
+     * - Returns: true if the content of this node is the same as the other
      * @see Node#hasSameValue(Object) to compare nodes by their value
      */
 
@@ -714,8 +714,8 @@ open class Node: Equatable, Hashable {
     /**
      * Check if this node is has the same content as another node. A node is considered the same if its name, attributes and content match the
      * other node; particularly its position in the tree does not influence its similarity.
-     * @param o other object to compare to
-     * @return true if the content of this node is the same as the other
+     * - Parameter o: other object to compare to
+     * - Returns: true if the content of this node is the same as the other
      */
 
     open func hasSameValue(_ o: Node)throws->Bool {
@@ -734,7 +734,7 @@ open class Node: Equatable, Hashable {
      * original node.
      * <p>
      * The cloned node may be adopted into another Document or node structure using {@link Element#appendChild(Node)}.
-     * @return stand-alone cloned node
+     * - Returns: stand-alone cloned node
      */
     public func copy(with zone: NSZone? = nil) -> Any {
 		return copy(clone: Node())

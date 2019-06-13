@@ -20,8 +20,8 @@ public protocol NodeVisitor {
     /**
      * Callback for when a node is first visited.
      *
-     * @param node the node being visited.
-     * @param depth the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
+     * - Parameter node: the node being visited.
+     * - Parameter depth: the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
      * of that will have depth 1.
      */
     func head(_ node: Node, _ depth: Int)throws
@@ -29,8 +29,8 @@ public protocol NodeVisitor {
     /**
      * Callback for when a node is last visited, after all of its descendants have been visited.
      *
-     * @param node the node being visited.
-     * @param depth the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
+     * - Parameter node: the node being visited.
+     * - Parameter depth: the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
      * of that will have depth 1.
      */
     func tail(_ node: Node, _ depth: Int)throws

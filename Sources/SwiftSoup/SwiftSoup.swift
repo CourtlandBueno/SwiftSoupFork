@@ -11,10 +11,10 @@ import Foundation
 	/**
 	Parse HTML into a Document. The parser will make a sensible, balanced document tree out of any HTML.
 	
-	@param html    HTML to parse
-	@param baseUri The URL where the HTML was retrieved from. Used to resolve relative URLs to absolute URLs, that occur
+	- Parameter html:    HTML to parse
+	- Parameter baseUri: The URL where the HTML was retrieved from. Used to resolve relative URLs to absolute URLs, that occur
 	before the HTML declares a {@code <base href>} tag.
-	@return sane HTML
+	- Returns: sane HTML
 	*/
 	public  func parse(_ html: String, _ baseUri: String)throws->Document {
 		return try Parser.parse(html, baseUri)
@@ -27,11 +27,11 @@ import Foundation
 	Parse HTML into a Document, using the provided Parser. You can provide an alternate parser, such as a simple XML
 	(non-HTML) parser.
 	
-	@param html    HTML to parse
-	@param baseUri The URL where the HTML was retrieved from. Used to resolve relative URLs to absolute URLs, that occur
+	- Parameter html:    HTML to parse
+	- Parameter baseUri: The URL where the HTML was retrieved from. Used to resolve relative URLs to absolute URLs, that occur
 	before the HTML declares a {@code <base href>} tag.
-	@param parser alternate {@link Parser#xmlParser() parser} to use.
-	@return sane HTML
+	- Parameter parser: alternate {@link Parser#xmlParser() parser} to use.
+	- Returns: sane HTML
 	*/
 	public  func parse(_ html: String, _ baseUri: String, _ parser: Parser)throws->Document {
 		return try parser.parseInput(html, baseUri)
@@ -44,8 +44,8 @@ import Foundation
 	Parse HTML into a Document. As no base URI is specified, absolute URL detection relies on the HTML including a
 	{@code <base href>} tag.
 	
-	@param html HTML to parse
-	@return sane HTML
+	- Parameter html: HTML to parse
+	- Returns: sane HTML
 	
 	@see #parse(String, String)
 	*/
@@ -64,8 +64,8 @@ import Foundation
 //	*  <li><code>Document doc = Jsoup.connect("http://example.com").userAgent("Mozilla").data("name", "jsoup").get();</code></li>
 //	*  <li><code>Document doc = Jsoup.connect("http://example.com").cookie("auth", "token").post();</code></li>
 //	* </ul>
-//	* @param url URL to connect to. The protocol must be {@code http} or {@code https}.
-//	* @return the connection. You can add data, cookies, and headers; set the user-agent, referrer, method; and then execute.
+//	* - Parameter url: URL to connect to. The protocol must be {@code http} or {@code https}.
+//	* - Returns: the connection. You can add data, cookies, and headers; set the user-agent, referrer, method; and then execute.
 //	*/
 //	public static Connection connect(String url) {
 //		return HttpConnection.connect(url);
@@ -75,11 +75,11 @@ import Foundation
 //	/**
 //	Parse the contents of a file as HTML.
 //	
-//	@param in          file to load HTML from
-//	@param charsetName (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
+//	- Parameter in:          file to load HTML from
+//	- Parameter charsetName: (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
 //	present, or fall back to {@code UTF-8} (which is often safe to do).
-//	@param baseUri     The URL where the HTML was retrieved from, to resolve relative links against.
-//	@return sane HTML
+//	- Parameter baseUri:     The URL where the HTML was retrieved from, to resolve relative links against.
+//	- Returns: sane HTML
 //	
 //	@throws IOException if the file could not be found, or read, or if the charsetName is invalid.
 //	*/
@@ -91,10 +91,10 @@ import Foundation
 //	/**
 //	Parse the contents of a file as HTML. The location of the file is used as the base URI to qualify relative URLs.
 //	
-//	@param in          file to load HTML from
-//	@param charsetName (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
+//	- Parameter in:          file to load HTML from
+//	- Parameter charsetName: (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
 //	present, or fall back to {@code UTF-8} (which is often safe to do).
-//	@return sane HTML
+//	- Returns: sane HTML
 //	
 //	@throws IOException if the file could not be found, or read, or if the charsetName is invalid.
 //	@see #parse(File, String, String)
@@ -106,11 +106,11 @@ import Foundation
 //	/**
 //	Read an input stream, and parse it to a Document.
 //	
-//	@param in          input stream to read. Make sure to close it after parsing.
-//	@param charsetName (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
+//	- Parameter in:          input stream to read. Make sure to close it after parsing.
+//	- Parameter charsetName: (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
 //	present, or fall back to {@code UTF-8} (which is often safe to do).
-//	@param baseUri     The URL where the HTML was retrieved from, to resolve relative links against.
-//	@return sane HTML
+//	- Parameter baseUri:     The URL where the HTML was retrieved from, to resolve relative links against.
+//	- Returns: sane HTML
 //	
 //	@throws IOException if the file could not be found, or read, or if the charsetName is invalid.
 //	*/
@@ -122,12 +122,12 @@ import Foundation
 //	Read an input stream, and parse it to a Document. You can provide an alternate parser, such as a simple XML
 //	(non-HTML) parser.
 //	
-//	@param in          input stream to read. Make sure to close it after parsing.
-//	@param charsetName (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
+//	- Parameter in:          input stream to read. Make sure to close it after parsing.
+//	- Parameter charsetName: (optional) character set of file contents. Set to {@code null} to determine from {@code http-equiv} meta tag, if
 //	present, or fall back to {@code UTF-8} (which is often safe to do).
-//	@param baseUri     The URL where the HTML was retrieved from, to resolve relative links against.
-//	@param parser alternate {@link Parser#xmlParser() parser} to use.
-//	@return sane HTML
+//	- Parameter baseUri:     The URL where the HTML was retrieved from, to resolve relative links against.
+//	- Parameter parser: alternate {@link Parser#xmlParser() parser} to use.
+//	- Returns: sane HTML
 //	
 //	@throws IOException if the file could not be found, or read, or if the charsetName is invalid.
 //	*/
@@ -138,9 +138,9 @@ import Foundation
 	/**
 	Parse a fragment of HTML, with the assumption that it forms the {@code body} of the HTML.
 	
-	@param bodyHtml body HTML fragment
-	@param baseUri  URL to resolve relative URLs against.
-	@return sane HTML document
+	- Parameter bodyHtml: body HTML fragment
+	- Parameter baseUri:  URL to resolve relative URLs against.
+	- Returns: sane HTML document
 	
 	@see Document#body()
 	*/
@@ -154,8 +154,8 @@ import Foundation
 	/**
 	Parse a fragment of HTML, with the assumption that it forms the {@code body} of the HTML.
 	
-	@param bodyHtml body HTML fragment
-	@return sane HTML document
+	- Parameter bodyHtml: body HTML fragment
+	- Returns: sane HTML document
 	
 	@see Document#body()
 	*/
@@ -171,9 +171,9 @@ import Foundation
 //	<p>
 //	The encoding character set is determined by the content-type header or http-equiv meta tag, or falls back to {@code UTF-8}.
 //	
-//	@param url           URL to fetch (with a GET). The protocol must be {@code http} or {@code https}.
-//	@param timeoutMillis Connection and read timeout, in milliseconds. If exceeded, IOException is thrown.
-//	@return The parsed HTML.
+//	- Parameter url:           URL to fetch (with a GET). The protocol must be {@code http} or {@code https}.
+//	- Parameter timeoutMillis: Connection and read timeout, in milliseconds. If exceeded, IOException is thrown.
+//	- Returns: The parsed HTML.
 //	
 //	@throws java.net.MalformedURLException if the request URL is not a HTTP or HTTPS URL, or is otherwise malformed
 //	@throws HttpStatusException if the response is not OK and HTTP response errors are not ignored
@@ -193,10 +193,10 @@ import Foundation
 	Get safe HTML from untrusted input HTML, by parsing input HTML and filtering it through a white-list of permitted
 	tags and attributes.
 	
-	@param bodyHtml  input untrusted HTML (body fragment)
-	@param baseUri   URL to resolve relative URLs against
-	@param whitelist white-list of permitted HTML elements
-	@return safe HTML (body fragment)
+	- Parameter bodyHtml:  input untrusted HTML (body fragment)
+	- Parameter baseUri:   URL to resolve relative URLs against
+	- Parameter whitelist: white-list of permitted HTML elements
+	- Returns: safe HTML (body fragment)
 	
 	@see Cleaner#clean(Document)
 	*/
@@ -214,9 +214,9 @@ import Foundation
 	Get safe HTML from untrusted input HTML, by parsing input HTML and filtering it through a white-list of permitted
 	tags and attributes.
 	
-	@param bodyHtml  input untrusted HTML (body fragment)
-	@param whitelist white-list of permitted HTML elements
-	@return safe HTML (body fragment)
+	- Parameter bodyHtml:  input untrusted HTML (body fragment)
+	- Parameter whitelist: white-list of permitted HTML elements
+	- Returns: safe HTML (body fragment)
 	
 	@see Cleaner#clean(Document)
 	*/
@@ -231,11 +231,11 @@ import Foundation
 	* permitted
 	* tags and attributes.
 	*
-	* @param bodyHtml input untrusted HTML (body fragment)
-	* @param baseUri URL to resolve relative URLs against
-	* @param whitelist white-list of permitted HTML elements
-	* @param outputSettings document output settings; use to control pretty-printing and entity escape modes
-	* @return safe HTML (body fragment)
+	* - Parameter bodyHtml: input untrusted HTML (body fragment)
+	* - Parameter baseUri: URL to resolve relative URLs against
+	* - Parameter whitelist: white-list of permitted HTML elements
+	* - Parameter outputSettings: document output settings; use to control pretty-printing and entity escape modes
+	* - Returns: safe HTML (body fragment)
 	* @see Cleaner#clean(Document)
 	*/
 	public  func clean(_ bodyHtml: String, _ baseUri: String, _ whitelist: Whitelist, _ outputSettings: OutputSettings)throws->String? {
@@ -252,9 +252,9 @@ import Foundation
     /**
      Test if the input HTML has only tags and attributes allowed by the Whitelist. Useful for form validation. The input HTML should
      still be run through the cleaner to set up enforced attributes, and to tidy the output.
-     @param bodyHtml HTML to test
-     @param whitelist whitelist to test against
-     @return true if no tags or attributes were removed; false otherwise
+     - Parameter bodyHtml: HTML to test
+     - Parameter whitelist: whitelist to test against
+     - Returns: true if no tags or attributes were removed; false otherwise
      @see #clean(String, org.jsoup.safety.Whitelist)
      */
     public  func isValid(_ bodyHtml: String, _ whitelist: Whitelist)throws->Bool {

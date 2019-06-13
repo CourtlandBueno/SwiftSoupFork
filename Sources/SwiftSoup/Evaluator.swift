@@ -17,9 +17,9 @@ public class Evaluator {
     /**
      * Test if the element meets the evaluator's requirements.
      *
-     * @param root    Root of the matching subtree
-     * @param element tested element
-     * @return Returns <tt>true</tt> if the requirements are met or
+     * - Parameter root:    Root of the matching subtree
+     * - Parameter element: tested element
+     * - Returns: <tt>true</tt> if the requirements are met or
      * <tt>false</tt> otherwise
      */
     open func matches(_ root: Element, _ element: Element)throws->Bool {

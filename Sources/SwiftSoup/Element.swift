@@ -22,9 +22,9 @@ open class Element: Node {
     /**
      * Create a new, standalone Element. (Standalone in that is has no parent.)
      *
-     * @param tag tag of this element
-     * @param baseUri the base URI
-     * @param attributes initial attributes
+     * - Parameter tag: tag of this element
+     * - Parameter baseUri: the base URI
+     * - Parameter attributes: initial attributes
      * @see #appendChild(Node)
      * @see #appendElement(String)
      */
@@ -35,8 +35,8 @@ open class Element: Node {
     /**
      * Create a new Element from a tag and a base URI.
      *
-     * @param tag element tag
-     * @param baseUri the base URI of this element. It is acceptable for the base URI to be an empty
+     * - Parameter tag: element tag
+     * - Parameter baseUri: the base URI of this element. It is acceptable for the base URI to be an empty
      *            string, but not null.
      * @see Tag#valueOf(String, ParseSettings)
      */
@@ -63,7 +63,7 @@ open class Element: Node {
     /**
      * Get the name of the tag for this element. E.g. {@code div}
      *
-     * @return the tag name
+     * - Returns: the tag name
      */
     open func tagName() -> String {
         return _tag.getName()
@@ -76,8 +76,8 @@ open class Element: Node {
      * Change the tag of this element. For example, convert a {@code <span>} to a {@code <div>} with
      * {@code el.tagName("div")}.
      *
-     * @param tagName new tag name for this element
-     * @return this element, for chaining
+     * - Parameter tagName: new tag name for this element
+     * - Returns: this element, for chaining
      */
     @discardableResult
     public func tagName(_ tagName: String)throws->Element {
@@ -89,7 +89,7 @@ open class Element: Node {
     /**
      * Get the Tag for this element.
      *
-     * @return the tag object
+     * - Returns: the tag object
      */
     open func tag() -> Tag {
         return _tag
@@ -99,7 +99,7 @@ open class Element: Node {
      * Test if this element is a block-level element. (E.g. {@code <div> == true} or an inline element
      * {@code <p> == false}).
      *
-     * @return true if block, false if not (and thus inline)
+     * - Returns: true if block, false if not (and thus inline)
      */
     open func isBlock() -> Bool {
         return _tag.isBlock()
@@ -108,7 +108,7 @@ open class Element: Node {
     /**
      * Get the {@code id} attribute of this element.
      *
-     * @return The id attribute, if present, or an empty string if not.
+     * - Returns: The id attribute, if present, or an empty string if not.
      */
     open func id() -> String {
         guard let attributes = attributes else {return Element.emptyString}
@@ -122,7 +122,7 @@ open class Element: Node {
      * Set an attribute value on this element. If this element already has an attribute with the
      * key, its value is updated; otherwise, a new attribute is added.
      *
-     * @return this element
+     * - Returns: this element
      */
     @discardableResult
     open override func attr(_ attributeKey: String, _ attributeValue: String)throws->Element {
@@ -135,10 +135,10 @@ open class Element: Node {
      * marks the attribute as boolean so no value is written out. Setting to <code>false</code> removes the attribute
      * with the same key if it exists.
      *
-     * @param attributeKey the attribute key
-     * @param attributeValue the attribute value
+     * - Parameter attributeKey: the attribute key
+     * - Parameter attributeValue: the attribute value
      *
-     * @return this element
+     * - Returns: this element
      */
     @discardableResult
     open func attr(_ attributeKey: String, _ attributeValue: Bool)throws->Element {
@@ -157,7 +157,7 @@ open class Element: Node {
      * in the other map.
      * <p>
      * You can find elements that have data attributes using the {@code [^data-]} attribute key prefix selector.
-     * @return a map of {@code key=value} custom data attributes.
+     * - Returns: a map of {@code key=value} custom data attributes.
      */
     open func dataset()->Dictionary<String, String> {
         return attributes!.dataset()
@@ -169,7 +169,7 @@ open class Element: Node {
 
     /**
      * Get this element's parent and ancestors, up to the document root.
-     * @return this element's stack of parents, closest first.
+     * - Returns: this element's stack of parents, closest first.
      */
     open func parents() -> Elements {
         let parents: Elements = Elements()
@@ -192,8 +192,8 @@ open class Element: Node {
      * a filtered list of children that are elements, and the index is based on that filtered list.
      * </p>
      *
-     * @param index the index number of the element to retrieve
-     * @return the child element, if it exists, otherwise throws an {@code IndexOutOfBoundsException}
+     * - Parameter index: the index number of the element to retrieve
+     * - Returns: the child element, if it exists, otherwise throws an {@code IndexOutOfBoundsException}
      * @see #childNode(int)
      */
     open func child(_ index: Int) -> Element {
@@ -205,7 +205,7 @@ open class Element: Node {
      * <p>
      * This is effectively a filter on {@link #childNodes()} to get Element nodes.
      * </p>
-     * @return child elements. If this element has no children, returns an
+     * - Returns: child elements. If this element has no children, returns an
      * empty list.
      * @see #childNodes()
      */
@@ -227,7 +227,7 @@ open class Element: Node {
      * Get this element's child text nodes. The list is unmodifiable but the text nodes may be manipulated.
      * <p>
      * This is effectively a filter on {@link #childNodes()} to get Text nodes.
-     * @return child text nodes. If this element has no text nodes, returns an
+     * - Returns: child text nodes. If this element has no text nodes, returns an
      * empty list.
      * </p>
      * For example, with the input HTML: {@code <p>One <span>Two</span> Three <br> Four</p>} with the {@code p} element selected:
@@ -254,7 +254,7 @@ open class Element: Node {
      * <p>
      * This is effectively a filter on {@link #childNodes()} to get Data nodes.
      * </p>
-     * @return child data nodes. If this element has no data nodes, returns an
+     * - Returns: child data nodes. If this element has no data nodes, returns an
      * empty list.
      * @see #data()
      */
@@ -283,8 +283,8 @@ open class Element: Node {
      * See the query syntax documentation in {@link org.jsoup.select.Selector}.
      * </p>
      *
-     * @param cssQuery a {@link Selector} CSS-like query
-     * @return elements that match the query (empty if none match)
+     * - Parameter cssQuery: a {@link Selector} CSS-like query
+     * - Returns: elements that match the query (empty if none match)
      * @see org.jsoup.select.Selector
      * @throws Selector.SelectorParseException (unchecked) on an invalid CSS query.
      */
@@ -300,8 +300,8 @@ open class Element: Node {
     
     /**
      * Check if this element matches the given {@link Selector} CSS query.
-     * @param cssQuery a {@link Selector} CSS query
-     * @return if this element matches the query
+     * - Parameter cssQuery: a {@link Selector} CSS query
+     * - Returns: if this element matches the query
      */
     public func iS(_ cssQuery: String)throws->Bool {
         return try iS(QueryParser.parse(cssQuery))
@@ -309,8 +309,8 @@ open class Element: Node {
 
     /**
      * Check if this element matches the given {@link Selector} CSS query.
-     * @param cssQuery a {@link Selector} CSS query
-     * @return if this element matches the query
+     * - Parameter cssQuery: a {@link Selector} CSS query
+     * - Returns: if this element matches the query
      */
     public func iS(_ evaluator: Evaluator)throws->Bool {
         guard let od = self.ownerDocument() else {
@@ -322,8 +322,8 @@ open class Element: Node {
     /**
      * Add a node child node to this element.
      *
-     * @param child node to add.
-     * @return this element, so that you can add more child nodes or elements.
+     * - Parameter child: node to add.
+     * - Returns: this element, so that you can add more child nodes or elements.
      */
     @discardableResult
     public func appendChild(_ child: Node)throws->Element {
@@ -338,8 +338,8 @@ open class Element: Node {
     /**
      * Add a node to the start of this element's children.
      *
-     * @param child node to add.
-     * @return this element, so that you can add more child nodes or elements.
+     * - Parameter child: node to add.
+     * - Returns: this element, so that you can add more child nodes or elements.
      */
     @discardableResult
     public func prependChild(_ child: Node)throws->Element {
@@ -351,10 +351,10 @@ open class Element: Node {
      * Inserts the given child nodes into this element at the specified index. Current nodes will be shifted to the
      * right. The inserted nodes will be moved from their current parent. To prevent moving, copy the nodes first.
      *
-     * @param index 0-based index to insert children at. Specify {@code 0} to insert at the start, {@code -1} at the
+     * - Parameter index: 0-based index to insert children at. Specify {@code 0} to insert at the start, {@code -1} at the
      * end
-     * @param children child nodes to insert
-     * @return this element, for chaining.
+     * - Parameter children: child nodes to insert
+     * - Returns: this element, for chaining.
      */
     @discardableResult
     public func insertChildren(_ index: Int, _ children: Array<Node>)throws->Element {
@@ -371,8 +371,8 @@ open class Element: Node {
     /**
      * Create a new element by tag name, and add it as the last child.
      *
-     * @param tagName the name of the tag (e.g. {@code div}).
-     * @return the new element, to allow you to add content to it, e.g.:
+     * - Parameter tagName: the name of the tag (e.g. {@code div}).
+     * - Returns: the new element, to allow you to add content to it, e.g.:
      *  {@code parent.appendElement("h1").attr("id", "header").text("Welcome")}
      */
     @discardableResult
@@ -385,8 +385,8 @@ open class Element: Node {
     /**
      * Create a new element by tag name, and add it as the first child.
      *
-     * @param tagName the name of the tag (e.g. {@code div}).
-     * @return the new element, to allow you to add content to it, e.g.:
+     * - Parameter tagName: the name of the tag (e.g. {@code div}).
+     * - Returns: the new element, to allow you to add content to it, e.g.:
      *  {@code parent.prependElement("h1").attr("id", "header").text("Welcome")}
      */
     @discardableResult
@@ -399,8 +399,8 @@ open class Element: Node {
     /**
      * Create and append a new TextNode to this element.
      *
-     * @param text the unencoded text to add
-     * @return this element
+     * - Parameter text: the unencoded text to add
+     * - Returns: this element
      */
     @discardableResult
     public func appendText(_ text: String)throws->Element {
@@ -412,8 +412,8 @@ open class Element: Node {
     /**
      * Create and prepend a new TextNode to this element.
      *
-     * @param text the unencoded text to add
-     * @return this element
+     * - Parameter text: the unencoded text to add
+     * - Returns: this element
      */
     @discardableResult
     public func prependText(_ text: String)throws->Element {
@@ -424,8 +424,8 @@ open class Element: Node {
 
     /**
      * Add inner HTML to this element. The supplied HTML will be parsed, and each node appended to the end of the children.
-     * @param html HTML to add inside this element, after the existing HTML
-     * @return this element
+     * - Parameter html: HTML to add inside this element, after the existing HTML
+     * - Returns: this element
      * @see #html(String)
      */
     @discardableResult
@@ -437,8 +437,8 @@ open class Element: Node {
 
     /**
      * Add inner HTML into this element. The supplied HTML will be parsed, and each node prepended to the start of the element's children.
-     * @param html HTML to add inside this element, before the existing HTML
-     * @return this element
+     * - Parameter html: HTML to add inside this element, before the existing HTML
+     * - Returns: this element
      * @see #html(String)
      */
     @discardableResult
@@ -451,8 +451,8 @@ open class Element: Node {
     /**
      * Insert the specified HTML into the DOM before this element (as a preceding sibling).
      *
-     * @param html HTML to add before this element
-     * @return this element, for chaining
+     * - Parameter html: HTML to add before this element
+     * - Returns: this element, for chaining
      * @see #after(String)
      */
     @discardableResult
@@ -462,8 +462,8 @@ open class Element: Node {
 
     /**
      * Insert the specified node into the DOM before this node (as a preceding sibling).
-     * @param node to add before this element
-     * @return this Element, for chaining
+     * - Parameter node: to add before this element
+     * - Returns: this Element, for chaining
      * @see #after(Node)
      */
     @discardableResult
@@ -474,8 +474,8 @@ open class Element: Node {
     /**
      * Insert the specified HTML into the DOM after this element (as a following sibling).
      *
-     * @param html HTML to add after this element
-     * @return this element, for chaining
+     * - Parameter html: HTML to add after this element
+     * - Returns: this element, for chaining
      * @see #before(String)
      */
     @discardableResult
@@ -485,8 +485,8 @@ open class Element: Node {
 
     /**
      * Insert the specified node into the DOM after this node (as a following sibling).
-     * @param node to add after this element
-     * @return this element, for chaining
+     * - Parameter node: to add after this element
+     * - Returns: this element, for chaining
      * @see #before(Node)
      */
     open override func after(_ node: Node)throws->Element {
@@ -495,7 +495,7 @@ open class Element: Node {
 
     /**
      * Remove all of the element's child nodes. Any attributes are left as-is.
-     * @return this element
+     * - Returns: this element
      */
     @discardableResult
     public func empty() -> Element {
@@ -506,8 +506,8 @@ open class Element: Node {
     /**
      * Wrap the supplied HTML around this element.
      *
-     * @param html HTML to wrap around this element, e.g. {@code <div class="head"></div>}. Can be arbitrarily deep.
-     * @return this element, for chaining.
+     * - Parameter html: HTML to wrap around this element, e.g. {@code <div class="head"></div>}. Can be arbitrarily deep.
+     * - Returns: this element, for chaining.
      */
     @discardableResult
     open override func wrap(_ html: String)throws->Element {
@@ -522,7 +522,7 @@ open class Element: Node {
      * followed by a unique selector for the element (tag.class.class:nth-child(n)).
      * </p>
      *
-     * @return the CSS Path that can be used to retrieve the element in a selector.
+     * - Returns: the CSS Path that can be used to retrieve the element in a selector.
      */
     public func cssSelector()throws->String {
         let elementId = id()
@@ -558,7 +558,7 @@ open class Element: Node {
     /**
      * Get sibling elements. If the element has no sibling elements, returns an empty list. An element is not a sibling
      * of itself, so will not be included in the returned list.
-     * @return sibling elements
+     * - Returns: sibling elements
      */
     public func siblingElements() -> Elements {
         if (parentNode == nil) {return Elements()}
@@ -581,7 +581,7 @@ open class Element: Node {
      * <p>
      * This is similar to {@link #nextSibling()}, but specifically finds only Elements
      * </p>
-     * @return the next element, or null if there is no next element
+     * - Returns: the next element, or null if there is no next element
      * @see #previousElementSibling()
      */
     public func nextElementSibling()throws->Element? {
@@ -600,7 +600,7 @@ open class Element: Node {
 
     /**
      * Gets the previous element sibling of this element.
-     * @return the previous element, or null if there is no previous element
+     * - Returns: the previous element, or null if there is no previous element
      * @see #nextElementSibling()
      */
     public func previousElementSibling()throws->Element? {
@@ -617,7 +617,7 @@ open class Element: Node {
 
     /**
      * Gets the first element sibling of this element.
-     * @return the first sibling that is an element (aka the parent's first element child)
+     * - Returns: the first sibling that is an element (aka the parent's first element child)
      */
     public func firstElementSibling() -> Element? {
         // todo: should firstSibling() exclude this?
@@ -628,7 +628,7 @@ open class Element: Node {
     /*
      * Get the list index of this element in its element sibling list. I.e. if this is the first element
      * sibling, returns 0.
-     * @return position in element sibling list
+     * - Returns: position in element sibling list
      */
     public func elementSiblingIndex()throws->Int {
         if (parent == nil) {return 0}
@@ -638,7 +638,7 @@ open class Element: Node {
 
     /**
      * Gets the last element sibling of this element
-     * @return the last sibling that is an element (aka the parent's last element child)
+     * - Returns: the last sibling that is an element (aka the parent's last element child)
      */
     public func lastElementSibling() -> Element? {
         let siblings: Array<Element>? = parent?.children.array()
@@ -662,8 +662,8 @@ open class Element: Node {
 
     /**
      * Finds elements, including and recursively under this element, with the specified tag name.
-     * @param tagName The tag name to search for (case insensitively).
-     * @return a matching unmodifiable list of elements. Will be empty if this element and none of its children match.
+     * - Parameter tagName: The tag name to search for (case insensitively).
+     * - Returns: a matching unmodifiable list of elements. Will be empty if this element and none of its children match.
      */
     public func getElementsByTag(_ tagName: String)throws->Elements {
         try Validate.notEmpty(string: tagName)
@@ -678,8 +678,8 @@ open class Element: Node {
      * Note that this finds the first matching ID, starting with this element. If you search down from a different
      * starting point, it is possible to find a different element by ID. For unique element by ID within a Document,
      * use {@link Document#getElementById(String)}
-     * @param id The ID to search for.
-     * @return The first matching element by ID, starting with this element, or null if none found.
+     * - Parameter id: The ID to search for.
+     * - Returns: The first matching element by ID, starting with this element, or null if none found.
      */
     public func getElementById(_ id: String)throws->Element? {
         try Validate.notEmpty(string: id)
@@ -698,8 +698,8 @@ open class Element: Node {
      * Elements can have multiple classes (e.g. {@code <div class="header round first">}. This method
      * checks each class, so you can find the above with {@code el.getElementsByClass("header")}.
      *
-     * @param className the name of the class to search for.
-     * @return elements with the supplied class name, empty if none
+     * - Parameter className: the name of the class to search for.
+     * - Returns: elements with the supplied class name, empty if none
      * @see #hasClass(String)
      * @see #classNames()
      */
@@ -712,8 +712,8 @@ open class Element: Node {
     /**
      * Find elements that have a named attribute set. Case insensitive.
      *
-     * @param key name of the attribute, e.g. {@code href}
-     * @return elements that have this attribute, empty if none
+     * - Parameter key: name of the attribute, e.g. {@code href}
+     * - Returns: elements that have this attribute, empty if none
      */
     public func getElementsByAttribute(_ key: String)throws->Elements {
         try Validate.notEmpty(string: key)
@@ -725,8 +725,8 @@ open class Element: Node {
     /**
      * Find elements that have an attribute name starting with the supplied prefix. Use {@code data-} to find elements
      * that have HTML5 datasets.
-     * @param keyPrefix name prefix of the attribute e.g. {@code data-}
-     * @return elements that have attribute names that start with with the prefix, empty if none.
+     * - Parameter keyPrefix: name prefix of the attribute e.g. {@code data-}
+     * - Returns: elements that have attribute names that start with with the prefix, empty if none.
      */
     public func getElementsByAttributeStarting(_ keyPrefix: String)throws->Elements {
         try Validate.notEmpty(string: keyPrefix)
@@ -738,9 +738,9 @@ open class Element: Node {
     /**
      * Find elements that have an attribute with the specific value. Case insensitive.
      *
-     * @param key name of the attribute
-     * @param value value of the attribute
-     * @return elements that have this attribute with this value, empty if none
+     * - Parameter key: name of the attribute
+     * - Parameter value: value of the attribute
+     * - Returns: elements that have this attribute with this value, empty if none
      */
     public func getElementsByAttributeValue(_ key: String, _ value: String)throws->Elements {
         return try Collector.collect(Evaluator.AttributeWithValue(key, value), self)
@@ -749,9 +749,9 @@ open class Element: Node {
     /**
      * Find elements that either do not have this attribute, or have it with a different value. Case insensitive.
      *
-     * @param key name of the attribute
-     * @param value value of the attribute
-     * @return elements that do not have a matching attribute
+     * - Parameter key: name of the attribute
+     * - Parameter value: value of the attribute
+     * - Returns: elements that do not have a matching attribute
      */
     public func getElementsByAttributeValueNot(_ key: String, _ value: String)throws->Elements {
         return try Collector.collect(Evaluator.AttributeWithValueNot(key, value), self)
@@ -760,9 +760,9 @@ open class Element: Node {
     /**
      * Find elements that have attributes that start with the value prefix. Case insensitive.
      *
-     * @param key name of the attribute
-     * @param valuePrefix start of attribute value
-     * @return elements that have attributes that start with the value prefix
+     * - Parameter key: name of the attribute
+     * - Parameter valuePrefix: start of attribute value
+     * - Returns: elements that have attributes that start with the value prefix
      */
     public func getElementsByAttributeValueStarting(_ key: String, _ valuePrefix: String)throws->Elements {
         return try Collector.collect(Evaluator.AttributeWithValueStarting(key, valuePrefix), self)
@@ -771,9 +771,9 @@ open class Element: Node {
     /**
      * Find elements that have attributes that end with the value suffix. Case insensitive.
      *
-     * @param key name of the attribute
-     * @param valueSuffix end of the attribute value
-     * @return elements that have attributes that end with the value suffix
+     * - Parameter key: name of the attribute
+     * - Parameter valueSuffix: end of the attribute value
+     * - Returns: elements that have attributes that end with the value suffix
      */
     public func getElementsByAttributeValueEnding(_ key: String, _ valueSuffix: String)throws->Elements {
         return try Collector.collect(Evaluator.AttributeWithValueEnding(key, valueSuffix), self)
@@ -782,9 +782,9 @@ open class Element: Node {
     /**
      * Find elements that have attributes whose value contains the match string. Case insensitive.
      *
-     * @param key name of the attribute
-     * @param match substring of value to search for
-     * @return elements that have attributes containing this text
+     * - Parameter key: name of the attribute
+     * - Parameter match: substring of value to search for
+     * - Returns: elements that have attributes containing this text
      */
     public func getElementsByAttributeValueContaining(_ key: String, _ match: String)throws->Elements {
         return try Collector.collect(Evaluator.AttributeWithValueContaining(key, match), self)
@@ -792,9 +792,9 @@ open class Element: Node {
 
     /**
      * Find elements that have attributes whose values match the supplied regular expression.
-     * @param key name of the attribute
-     * @param pattern compiled regular expression to match against attribute values
-     * @return elements that have attributes matching this regular expression
+     * - Parameter key: name of the attribute
+     * - Parameter pattern: compiled regular expression to match against attribute values
+     * - Returns: elements that have attributes matching this regular expression
      */
     public func getElementsByAttributeValueMatching(_ key: String, _ pattern: Pattern)throws->Elements {
         return try Collector.collect(Evaluator.AttributeWithValueMatching(key, pattern), self)
@@ -803,9 +803,9 @@ open class Element: Node {
 
     /**
      * Find elements that have attributes whose values match the supplied regular expression.
-     * @param key name of the attribute
-     * @param regex regular expression to match against attribute values. You can use <a href="http://java.sun.com/docs/books/tutorial/essential/regex/pattern.html#embedded">embedded flags</a> (such as (?i) and (?m) to control regex options.
-     * @return elements that have attributes matching this regular expression
+     * - Parameter key: name of the attribute
+     * - Parameter regex: regular expression to match against attribute values. You can use <a href="http://java.sun.com/docs/books/tutorial/essential/regex/pattern.html#embedded">embedded flags</a> (such as (?i) and (?m) to control regex options.
+     * - Returns: elements that have attributes matching this regular expression
      */
     public func getElementsByAttributeValueMatching(_ key: String, _ regex: String)throws->Elements {
         var pattern: Pattern
@@ -820,8 +820,8 @@ open class Element: Node {
 
     /**
      * Find elements whose sibling index is less than the supplied index.
-     * @param index 0-based index
-     * @return elements less than index
+     * - Parameter index: 0-based index
+     * - Returns: elements less than index
      */
     public func getElementsByIndexLessThan(_ index: Int)throws->Elements {
         return try Collector.collect(Evaluator.IndexLessThan(index), self)
@@ -829,8 +829,8 @@ open class Element: Node {
 
     /**
      * Find elements whose sibling index is greater than the supplied index.
-     * @param index 0-based index
-     * @return elements greater than index
+     * - Parameter index: 0-based index
+     * - Returns: elements greater than index
      */
     public func getElementsByIndexGreaterThan(_ index: Int)throws->Elements {
         return try Collector.collect(Evaluator.IndexGreaterThan(index), self)
@@ -838,8 +838,8 @@ open class Element: Node {
 
     /**
      * Find elements whose sibling index is equal to the supplied index.
-     * @param index 0-based index
-     * @return elements equal to index
+     * - Parameter index: 0-based index
+     * - Returns: elements equal to index
      */
     public func getElementsByIndexEquals(_ index: Int)throws->Elements {
         return try Collector.collect(Evaluator.IndexEquals(index), self)
@@ -848,8 +848,8 @@ open class Element: Node {
     /**
      * Find elements that contain the specified string. The search is case insensitive. The text may appear directly
      * in the element, or in any of its descendants.
-     * @param searchText to look for in the element's text
-     * @return elements that contain the string, case insensitive.
+     * - Parameter searchText: to look for in the element's text
+     * - Returns: elements that contain the string, case insensitive.
      * @see Element#text()
      */
     public func getElementsContainingText(_ searchText: String)throws->Elements {
@@ -859,8 +859,8 @@ open class Element: Node {
     /**
      * Find elements that directly contain the specified string. The search is case insensitive. The text must appear directly
      * in the element, not in any of its descendants.
-     * @param searchText to look for in the element's own text
-     * @return elements that contain the string, case insensitive.
+     * - Parameter searchText: to look for in the element's own text
+     * - Returns: elements that contain the string, case insensitive.
      * @see Element#ownText()
      */
     public func getElementsContainingOwnText(_ searchText: String)throws->Elements {
@@ -869,8 +869,8 @@ open class Element: Node {
 
     /**
      * Find elements whose text matches the supplied regular expression.
-     * @param pattern regular expression to match text against
-     * @return elements matching the supplied regular expression.
+     * - Parameter pattern: regular expression to match text against
+     * - Returns: elements matching the supplied regular expression.
      * @see Element#text()
      */
     public func getElementsMatchingText(_ pattern: Pattern)throws->Elements {
@@ -879,8 +879,8 @@ open class Element: Node {
 
     /**
      * Find elements whose text matches the supplied regular expression.
-     * @param regex regular expression to match text against. You can use <a href="http://java.sun.com/docs/books/tutorial/essential/regex/pattern.html#embedded">embedded flags</a> (such as (?i) and (?m) to control regex options.
-     * @return elements matching the supplied regular expression.
+     * - Parameter regex: regular expression to match text against. You can use <a href="http://java.sun.com/docs/books/tutorial/essential/regex/pattern.html#embedded">embedded flags</a> (such as (?i) and (?m) to control regex options.
+     * - Returns: elements matching the supplied regular expression.
      * @see Element#text()
      */
     public func getElementsMatchingText(_ regex: String)throws->Elements {
@@ -896,8 +896,8 @@ open class Element: Node {
 
     /**
      * Find elements whose own text matches the supplied regular expression.
-     * @param pattern regular expression to match text against
-     * @return elements matching the supplied regular expression.
+     * - Parameter pattern: regular expression to match text against
+     * - Returns: elements matching the supplied regular expression.
      * @see Element#ownText()
      */
     public func getElementsMatchingOwnText(_ pattern: Pattern)throws->Elements {
@@ -906,8 +906,8 @@ open class Element: Node {
 
     /**
      * Find elements whose text matches the supplied regular expression.
-     * @param regex regular expression to match text against. You can use <a href="http://java.sun.com/docs/books/tutorial/essential/regex/pattern.html#embedded">embedded flags</a> (such as (?i) and (?m) to control regex options.
-     * @return elements matching the supplied regular expression.
+     * - Parameter regex: regular expression to match text against. You can use <a href="http://java.sun.com/docs/books/tutorial/essential/regex/pattern.html#embedded">embedded flags</a> (such as (?i) and (?m) to control regex options.
+     * - Returns: elements matching the supplied regular expression.
      * @see Element#ownText()
      */
     public func getElementsMatchingOwnText(_ regex: String)throws->Elements {
@@ -924,7 +924,7 @@ open class Element: Node {
     /**
      * Find all elements under this element (including self, and children of children).
      *
-     * @return all elements
+     * - Returns: all elements
      */
     public func getAllElements()throws->Elements {
         return try Collector.collect(Evaluator.AllElements(), self)
@@ -935,7 +935,7 @@ open class Element: Node {
      * <p>
      * For example, given HTML {@code <p>Hello  <b>there</b> now! </p>}, {@code p.text()} returns {@code "Hello there now!"}
      *
-     * @return unencoded text, or empty string if none.
+     * - Returns: unencoded text, or empty string if none.
      * @see #ownText()
      * @see #textNodes()
      */
@@ -973,7 +973,7 @@ open class Element: Node {
      * whereas {@code p.text()} returns {@code "Hello there now!"}.
      * Note that the text within the {@code b} element is not returned, as it is not a direct child of the {@code p} element.
      *
-     * @return unencoded text, or empty string if none.
+     * - Returns: unencoded text, or empty string if none.
      * @see #text()
      * @see #textNodes()
      */
@@ -1020,8 +1020,8 @@ open class Element: Node {
 
     /**
      * Set the text of this element. Any existing contents (text or elements) will be cleared
-     * @param text unencoded text
-     * @return this element
+     * - Parameter text: unencoded text
+     * - Returns: this element
      */
     @discardableResult
     public func text(_ text: String)throws->Element {
@@ -1033,7 +1033,7 @@ open class Element: Node {
 
     /**
      Test if this element has any text content (that is not just whitespace).
-     @return true if element has non-blank text content.
+     - Returns: true if element has non-blank text content.
      */
     public func hasText() -> Bool {
         for child: Node in childNodes {
@@ -1052,7 +1052,7 @@ open class Element: Node {
 
     /**
      * Get the combined data of this element. Data is e.g. the inside of a {@code script} tag.
-     * @return the data, or empty string if none
+     * - Returns: the data, or empty string if none
      *
      * @see #dataNodes()
      */
@@ -1073,7 +1073,7 @@ open class Element: Node {
     /**
      * Gets the literal value of this element's "class" attribute, which may include multiple class names, space
      * separated. (E.g. on <code>&lt;div class="header gray"&gt;</code> returns, "<code>header gray</code>")
-     * @return The literal class attribute, or <b>empty string</b> if no class attribute set.
+     * - Returns: The literal class attribute, or <b>empty string</b> if no class attribute set.
      */
     public func className()throws->String {
         return try attr(Element.classString).trim()
@@ -1083,7 +1083,7 @@ open class Element: Node {
      * Get all of the element's class names. E.g. on element {@code <div class="header gray">},
      * returns a set of two elements {@code "header", "gray"}. Note that modifications to this set are not pushed to
      * the backing {@code class} attribute; use the {@link #classNames(java.util.Set)} method to persist them.
-     * @return set of classnames, empty if no class attribute
+     * - Returns: set of classnames, empty if no class attribute
      */
 	public func classNames()throws->OrderedSet<String> {
 		let fitted = try className().replaceAll(of: Element.classSplit, with: " ", options: .caseInsensitive)
@@ -1095,8 +1095,8 @@ open class Element: Node {
 
     /**
      Set the element's {@code class} attribute to the supplied class names.
-     @param classNames set of classes
-     @return this element, for chaining
+     - Parameter classNames: set of classes
+     - Returns: this element, for chaining
      */
     @discardableResult
     public func classNames(_ classNames: OrderedSet<String>)throws->Element {
@@ -1106,8 +1106,8 @@ open class Element: Node {
 
     /**
      * Tests if this element has a class. Case insensitive.
-     * @param className name of class to check for
-     * @return true if it does, false if not
+     * - Parameter className: name of class to check for
+     * - Returns: true if it does, false if not
      */
     // performance sensitive
     public func hasClass(_ className: String) -> Bool {
@@ -1156,8 +1156,8 @@ open class Element: Node {
 
     /**
      Add a class name to this element's {@code class} attribute.
-     @param className class name to add
-     @return this element
+     - Parameter className: class name to add
+     - Returns: this element
      */
     @discardableResult
 	public func addClass(_ className: String)throws->Element {
@@ -1169,8 +1169,8 @@ open class Element: Node {
 
     /**
      Remove a class name from this element's {@code class} attribute.
-     @param className class name to remove
-     @return this element
+     - Parameter className: class name to remove
+     - Returns: this element
      */
     @discardableResult
     public func removeClass(_ className: String)throws->Element {
@@ -1182,8 +1182,8 @@ open class Element: Node {
 
     /**
      Toggle a class name on this element's {@code class} attribute: if present, remove it; otherwise add it.
-     @param className class name to toggle
-     @return this element
+     - Parameter className: class name to toggle
+     - Returns: this element
      */
     @discardableResult
     public func toggleClass(_ className: String)throws->Element {
@@ -1199,7 +1199,7 @@ open class Element: Node {
 
     /**
      * Get the value of a form element (input, textarea, etc).
-     * @return the value of the form element, or empty string if not set.
+     * - Returns: the value of the form element, or empty string if not set.
      */
     public func val()throws->String {
         if (tagName()=="textarea") {
@@ -1211,8 +1211,8 @@ open class Element: Node {
 
     /**
      * Set the value of a form element (input, textarea, etc).
-     * @param value value to set
-     * @return this element (for chaining)
+     * - Parameter value: value to set
+     * - Returns: this element (for chaining)
      */
     @discardableResult
     public func val(_ value: String)throws->Element {
@@ -1262,7 +1262,7 @@ open class Element: Node {
      * Retrieves the element's inner HTML. E.g. on a {@code <div>} with one empty {@code <p>}, would return
      * {@code <p></p>}. (Whereas {@link #outerHtml()} would return {@code <div><p></p></div>}.)
      *
-     * @return String of HTML.
+     * - Returns: String of HTML.
      * @see #outerHtml()
      */
     public func html()throws->String {
@@ -1289,8 +1289,8 @@ open class Element: Node {
 
 	/**
 	* Set this element's inner HTML. Clears the existing HTML first.
-	* @param html HTML to parse and set into this element
-	* @return this element
+	* - Parameter html: HTML to parse and set into this element
+	* - Returns: this element
 	* @see #append(String)
 	*/
     @discardableResult

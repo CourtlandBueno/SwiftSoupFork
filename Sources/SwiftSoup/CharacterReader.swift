@@ -70,8 +70,8 @@ public final class CharacterReader {
 
     /**
      * Returns the number of characters between the current position and the next instance of the input char
-     * @param c scan target
-     * @return offset between current position and next instance of target. -1 if not found.
+     * - Parameter c: scan target
+     * - Returns: offset between current position and next instance of target. -1 if not found.
      */
     public func nextIndexOf(_ c: UnicodeScalar) -> Int {
         // doesn't handle scanning for surrogates
@@ -86,8 +86,8 @@ public final class CharacterReader {
     /**
      * Returns the number of characters between the current position and the next instance of the input sequence
      *
-     * @param seq scan target
-     * @return offset between current position and next instance of target. -1 if not found.
+     * - Parameter seq: scan target
+     * - Returns: offset between current position and next instance of target. -1 if not found.
      */
     public func nextIndexOf(_ seq: String) -> Int {
         // doesn't handle scanning for surrogates

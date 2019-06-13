@@ -16,8 +16,8 @@ public class Comment: Node {
 
     /**
      Create a new comment node.
-     @param data The contents of the comment
-     @param baseUri base URI
+     - Parameter data: The contents of the comment
+     - Parameter baseUri: base URI
      */
     public init(_ data: String, _ baseUri: String) {
         super.init(baseUri)
@@ -32,7 +32,7 @@ public class Comment: Node {
 
     /**
      Get the contents of the comment.
-     @return comment content
+     - Returns: comment content
      */
     public func getData() -> String {
 		return attributes!.get(key: Comment.COMMENT_KEY)

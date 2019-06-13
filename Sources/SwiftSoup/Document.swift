@@ -20,7 +20,7 @@ open class Document: Element, Codable {
 
     /**
      Create a new, empty Document.
-     @param baseUri base URI of document
+     - Parameter baseUri: base URI of document
      @see org.jsoup.Jsoup#parse
      @see #createShell
      */
@@ -70,8 +70,8 @@ open class Document: Element, Codable {
     
     /**
      Create a valid, empty shell of a document, suitable for adding more elements to.
-     @param baseUri baseUri of document
-     @return document with html, head, and body elements.
+     - Parameter baseUri: baseUri of document
+     - Returns: document with html, head, and body elements.
      */
     static public func createShell(_ baseUri: String) -> Document {
         let doc: Document = Document(baseUri)
@@ -85,7 +85,7 @@ open class Document: Element, Codable {
     /**
      * Get the URL this Document was parsed from. If the starting URL is a redirect,
      * this will return the final URL from which the document was served from.
-     * @return location
+     * - Returns: location
      */
     public func location() -> String {
     return _location
@@ -93,7 +93,7 @@ open class Document: Element, Codable {
 
     /**
      Accessor to the document's {@code head} element.
-     @return {@code head}
+     - Returns: {@code head}
      */
     public func head() -> Element? {
         return findFirstElementByTagName("head", self)
@@ -101,7 +101,7 @@ open class Document: Element, Codable {
 
     /**
      Accessor to the document's {@code body} element.
-     @return {@code body}
+     - Returns: {@code body}
      */
     public func body() -> Element? {
         return findFirstElementByTagName("body", self)
@@ -109,7 +109,7 @@ open class Document: Element, Codable {
 
     /**
      Get the string contents of the document's {@code title} element.
-     @return Trimmed title, or empty string if none set.
+     - Returns: Trimmed title, or empty string if none set.
      */
     public func title()throws->String {
         // title is a preserve whitespace tag (for document output), but normalised here
@@ -120,7 +120,7 @@ open class Document: Element, Codable {
     /**
      Set the document's {@code title} element. Updates the existing element, or adds {@code title} to {@code head} if
      not present
-     @param title string to set as title
+     - Parameter title: string to set as title
      */
     public func title(_ title: String)throws {
         let titleEl: Element? = try getElementsByTag("title").first
@@ -133,8 +133,8 @@ open class Document: Element, Codable {
 
     /**
      Create a new Element, with this document's base uri. Does not make the new element a child of this document.
-     @param tagName element tag name (e.g. {@code a})
-     @return new element
+     - Parameter tagName: element tag name (e.g. {@code a})
+     - Returns: new element
      */
     public func createElement(_ tagName: String)throws->Element {
         return try Element(Tag.valueOf(tagName, ParseSettings.preserveCase), self.getBaseUri())
@@ -143,7 +143,7 @@ open class Document: Element, Codable {
     /**
      Normalise the document. This happens after the parse phase so generally does not need to be called.
      Moves any text content that is not in the body element into the body.
-     @return this document after normalisation
+     - Returns: this document after normalisation
      */
     @discardableResult
     public func normalise()throws->Document {
@@ -238,8 +238,8 @@ open class Document: Element, Codable {
 
     /**
      Set the text of the {@code body} of this document. Any existing nodes within the body will be cleared.
-     @param text unencoded text
-     @return this document
+     - Parameter text: unencoded text
+     - Returns: this document
      */
     @discardableResult
     public override func text(_ text: String)throws->Element {
@@ -265,12 +265,12 @@ open class Document: Element, Codable {
      *
      * <p><b>Elements used:</b></p>
      *
-     * <ul>
-     * <li><b>Html:</b> <i>&lt;meta charset="CHARSET"&gt;</i></li>
-     * <li><b>Xml:</b> <i>&lt;?xml version="1.0" encoding="CHARSET"&gt;</i></li>
-     * </ul>
      *
-     * @param charset Charset
+     * - <b>Html:</b> <i>&lt;meta charset="CHARSET"&gt;</i>
+     * - <b>Xml:</b> <i>&lt;?xml version="1.0" encoding="CHARSET"&gt;</i>
+     *
+     *
+     * - Parameter charset: Charset
      *
      * @see #updateMetaCharsetElement(boolean)
      * @see OutputSettings#charset(java.nio.charset.Charset)
@@ -285,7 +285,7 @@ open class Document: Element, Codable {
      * Returns the charset used in this document. This method is equivalent
      * to {@link OutputSettings#charset()}.
      *
-     * @return Current Charset
+     * - Returns: Current Charset
      *
      * @see OutputSettings#charset()
      */
@@ -301,7 +301,7 @@ open class Document: Element, Codable {
      * <p>If set to <tt>false</tt> <i>(default)</i> there are no elements
      * modified.</p>
      *
-     * @param update If <tt>true</tt> the element updated on charset
+     * - Parameter update: If <tt>true</tt> the element updated on charset
      * changes, <tt>false</tt> if not
      *
      * @see #charset(java.nio.charset.Charset)
@@ -315,7 +315,7 @@ open class Document: Element, Codable {
      * updated on changes through {@link #charset(java.nio.charset.Charset)
      * Document.charset(Charset)} or not.
      *
-     * @return Returns <tt>true</tt> if the element is updated on charset
+     * - Returns: <tt>true</tt> if the element is updated on charset
      * changes, <tt>false</tt> if not
      */
     public func updateMetaCharsetElement() -> Bool {
@@ -328,17 +328,17 @@ open class Document: Element, Codable {
      * {@link #updateMetaCharsetElement(boolean) updateMetaCharset} set to
      * <tt>true</tt>, otherwise this method does nothing.
      *
-     * <ul>
-     * <li>An exsiting element gets updated with the current charset</li>
-     * <li>If there's no element yet it will be inserted</li>
-     * <li>Obsolete elements are removed</li>
-     * </ul>
+     * 
+     * - An exsiting element gets updated with the current charset
+     * - If there's no element yet it will be inserted
+     * - Obsolete elements are removed
+     *
      *
      * <p><b>Elements used:</b></p>
      *
      * <ul>
-     * <li><b>Html:</b> <i>&lt;meta charset="CHARSET"&gt;</i></li>
-     * <li><b>Xml:</b> <i>&lt;?xml version="1.0" encoding="CHARSET"&gt;</i></li>
+     * - <b>Html:</b> <i>&lt;meta charset="CHARSET"&gt;</i></li>
+     * - <b>Xml:</b> <i>&lt;?xml version="1.0" encoding="CHARSET"&gt;</i></li>
      * </ul>
      */
     private func ensureMetaCharsetElement()throws {
@@ -394,7 +394,7 @@ open class Document: Element, Codable {
 
     /**
      * Get the document's current output settings.
-     * @return the document's current output settings.
+     * - Returns: the document's current output settings.
      */
     public func outputSettings() -> OutputSettings {
     return _outputSettings
@@ -402,8 +402,8 @@ open class Document: Element, Codable {
 
     /**
      * Set the document's output settings.
-     * @param outputSettings new output settings.
-     * @return this document, for chaining.
+     * - Parameter outputSettings: new output settings.
+     * - Returns: this document, for chaining.
      */
     @discardableResult
     public func outputSettings(_ outputSettings: OutputSettings) -> Document {
@@ -495,7 +495,7 @@ public class OutputSettings: NSCopying, Codable {
      * which uses the complete set of HTML named entities.
      * <p>
      * The default escape mode is <code>base</code>.
-     * @return the document's current escape mode
+     * - Returns: the document's current escape mode
      */
     public func escapeMode() -> Entities.EscapeMode {
         return _escapeMode
@@ -504,8 +504,8 @@ public class OutputSettings: NSCopying, Codable {
     /**
      * Set the document's escape mode, which determines how characters are escaped when the output character set
      * does not support a given character:- using either a named or a numbered escape.
-     * @param escapeMode the new escape mode to use
-     * @return the document's output settings, for chaining
+     * - Parameter escapeMode: the new escape mode to use
+     * - Returns: the document's output settings, for chaining
      */
     @discardableResult
     public func escapeMode(_ escapeMode: Entities.EscapeMode) -> OutputSettings {
@@ -519,7 +519,7 @@ public class OutputSettings: NSCopying, Codable {
      * <p>
      * Where possible (when parsing from a URL or File), the document's output charset is automatically set to the
      * input charset. Otherwise, it defaults to UTF-8.
-     * @return the document's current charset.
+     * - Returns: the document's current charset.
      */
     public func encoder() -> String.Encoding {
         return _encoder
@@ -530,8 +530,8 @@ public class OutputSettings: NSCopying, Codable {
 
     /**
      * Update the document's output charset.
-     * @param charset the new charset to use.
-     * @return the document's output settings, for chaining
+     * - Parameter charset: the new charset to use.
+     * - Returns: the document's output settings, for chaining
      */
     @discardableResult
     public func encoder(_ encoder: String.Encoding) -> OutputSettings {
@@ -546,7 +546,7 @@ public class OutputSettings: NSCopying, Codable {
 
     /**
      * Get the document's current output syntax.
-     * @return current syntax
+     * - Returns: current syntax
      */
     public func syntax() -> Syntax {
         return _syntax
@@ -555,8 +555,8 @@ public class OutputSettings: NSCopying, Codable {
     /**
      * Set the document's output syntax. Either {@code html}, with empty tags and boolean attributes (etc), or
      * {@code xml}, with self-closing tags.
-     * @param syntax serialization syntax
-     * @return the document's output settings, for chaining
+     * - Parameter syntax: serialization syntax
+     * - Returns: the document's output settings, for chaining
      */
     @discardableResult
     public func syntax(syntax: Syntax) -> OutputSettings {
@@ -567,7 +567,7 @@ public class OutputSettings: NSCopying, Codable {
     /**
      * Get if pretty printing is enabled. Default is true. If disabled, the HTML output methods will not re-format
      * the output, and the output will generally look like the input.
-     * @return if pretty printing is enabled.
+     * - Returns: if pretty printing is enabled.
      */
     public func prettyPrint() -> Bool {
         return _prettyPrint
@@ -575,8 +575,8 @@ public class OutputSettings: NSCopying, Codable {
 
     /**
      * Enable or disable pretty printing.
-     * @param pretty new pretty print setting
-     * @return this, for chaining
+     * - Parameter pretty: new pretty print setting
+     * - Returns: this, for chaining
      */
     @discardableResult
     public func prettyPrint(pretty: Bool) -> OutputSettings {
@@ -587,7 +587,7 @@ public class OutputSettings: NSCopying, Codable {
     /**
      * Get if outline mode is enabled. Default is false. If enabled, the HTML output methods will consider
      * all tags as block.
-     * @return if outline mode is enabled.
+     * - Returns: if outline mode is enabled.
      */
     public func outline() -> Bool {
         return _outline
@@ -595,8 +595,8 @@ public class OutputSettings: NSCopying, Codable {
 
     /**
      * Enable or disable HTML outline mode.
-     * @param outlineMode new outline setting
-     * @return this, for chaining
+     * - Parameter outlineMode: new outline setting
+     * - Returns: this, for chaining
      */
     @discardableResult
     public func outline(outlineMode: Bool) -> OutputSettings {
@@ -606,7 +606,7 @@ public class OutputSettings: NSCopying, Codable {
 
     /**
      * Get the current tag indent amount, used when pretty printing.
-     * @return the current indent amount
+     * - Returns: the current indent amount
      */
     public func indentAmount() -> UInt {
         return _indentAmount
@@ -614,8 +614,8 @@ public class OutputSettings: NSCopying, Codable {
 
     /**
      * Set the indent amount for pretty printing
-     * @param indentAmount number of spaces to use for indenting each level. Must be {@literal >=} 0.
-     * @return this, for chaining
+     * - Parameter indentAmount: number of spaces to use for indenting each level. Must be {@literal >=} 0.
+     * - Returns: this, for chaining
      */
     @discardableResult
     public func indentAmount(indentAmount: UInt) -> OutputSettings {

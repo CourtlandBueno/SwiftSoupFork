@@ -13,7 +13,7 @@ struct Validate {
     public typealias Result = Swift.Result<ValidationSuccess,Exception>
     /**
      * Validates that the object is not null
-     * @param obj object to test
+     * - Parameter obj: object to test
      */
     public static func notNull(obj: Any?) throws {
         if (obj == nil) {
@@ -31,8 +31,8 @@ struct Validate {
 
     /**
      * Validates that the object is not null
-     * @param obj object to test
-     * @param msg message to output if validation fails
+     * - Parameter obj: object to test
+     * - Parameter msg: message to output if validation fails
      */
     public static func notNull(obj: AnyObject?, msg: String) throws {
         if (obj == nil) {
@@ -48,7 +48,7 @@ struct Validate {
     }
     /**
      * Validates that the value is true
-     * @param val object to test
+     * - Parameter val: object to test
      */
     public static func isTrue(val: Bool) throws {
         if (!val) {
@@ -58,8 +58,8 @@ struct Validate {
     
     /**
      * Validates that the value is true
-     * @param val object to test
-     * @param msg message to output if validation fails
+     * - Parameter val: object to test
+     * - Parameter msg: message to output if validation fails
      */
     public static func isTrue(val: Bool, msg: String) throws {
         if (!val) {
@@ -77,7 +77,7 @@ struct Validate {
     
     /**
      * Validates that the value is false
-     * @param val object to test
+     * - Parameter val: object to test
      */
     public static func isFalse(val: Bool) throws {
         if (val) {
@@ -87,8 +87,8 @@ struct Validate {
 
     /**
      * Validates that the value is false
-     * @param val object to test
-     * @param msg message to output if validation fails
+     * - Parameter val: object to test
+     * - Parameter msg: message to output if validation fails
      */
     public static func isFalse(val: Bool, msg: String) throws {
         if (val) {
@@ -103,7 +103,7 @@ struct Validate {
     }
     /**
      * Validates that the array contains no null elements
-     * @param objects the array to test
+     * - Parameter objects: the array to test
      */
     public static func noNullElements(objects: [AnyObject?]) throws {
         try noNullElements(objects: objects, msg: "Array must not contain any null objects")
@@ -111,8 +111,8 @@ struct Validate {
 
     /**
      * Validates that the array contains no null elements
-     * @param objects the array to test
-     * @param msg message to output if validation fails
+     * - Parameter objects: the array to test
+     * - Parameter msg: message to output if validation fails
      */
     public static func noNullElements(objects: [AnyObject?], msg: String) throws {
         for obj in objects {
@@ -132,7 +132,7 @@ struct Validate {
     }
     /**
      * Validates that the string is not empty
-     * @param string the string to test
+     * - Parameter string: the string to test
      */
     public static func notEmpty(string: String?) throws {
         if (string == nil || string?.count == 0) {
@@ -143,8 +143,8 @@ struct Validate {
 
     /**
      * Validates that the string is not empty
-     * @param string the string to test
-     * @param msg message to output if validation fails
+     * - Parameter string: the string to test
+     * - Parameter msg: message to output if validation fails
      */
    public static func notEmpty(string: String?, msg: String ) throws {
         if (string == nil || string?.count == 0) {
@@ -160,7 +160,7 @@ struct Validate {
     }
     /**
      Cause a failure.
-     @param msg message to output.
+     - Parameter msg: message to output.
      */
     public static func fail(msg: String) throws {
         throw Exception.Error(type: ExceptionType.IllegalArgumentException, Message: msg)
